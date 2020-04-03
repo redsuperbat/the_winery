@@ -20,7 +20,7 @@ class ExportModel extends BaseModel {
       : _db = db,
         _api = api;
 
-  List<Map<String,dynamic>> wines;
+  List<Map<String, dynamic>> wines;
 
   List<List<String>> rows;
 
@@ -35,10 +35,9 @@ class ExportModel extends BaseModel {
     await _api.exportCellar();
   }
 
-  Future getCellar()async{
+  Future getCellar() async {
     await _api.importCellar();
   }
-
 
   void startExport() {
     export = !export;
@@ -69,14 +68,11 @@ class ExportModel extends BaseModel {
         row.add(wines[i]['rating']?.toString() ?? "");
         rows.add(row);
       }
-      Map<PermissionGroup, PermissionStatus> permissions =
-          await PermissionHandler()
-              .requestPermissions([PermissionGroup.storage]);
 
-      if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
+      //  Either the permission was already granted before or the user just granted it
+      if (await Permission.storage.request().isGranted) {
         //store file in documents folder
-        final String dir =
-            (await getExternalStorageDirectory()).absolute.path;
+        final String dir = (await getExternalStorageDirectory()).absolute.path;
         print("The file is at: $dir/$filename.csv");
         final File f = File("$dir/$filename.csv");
 
