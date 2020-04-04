@@ -13,7 +13,7 @@ class SettingsView extends StatelessWidget {
           settings: Provider.of(context),
           db: Provider.of(context),
           profile: Provider.of(context)),
-    //  onModelReady: (model) => model.loadProfiles(),
+      //  onModelReady: (model) => model.loadProfiles(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           title: Text("Settings"),
@@ -26,7 +26,7 @@ class SettingsView extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   IconData(0xf0d6, fontFamily: 'Currency'),
-                  size: 40,
+                  size: 30,
                   color: mainColor,
                 ),
                 title: Text("Change currency"),
@@ -43,9 +43,7 @@ class SettingsView extends StatelessWidget {
                   onChanged: (value) => model.setCurrency(value),
                 ),
               ),
-              Cellars(
-                  model: model
-              ),
+              Cellars(model: model),
               ListTile(
                 onTap: () => showDialog(
                   context: context,
@@ -90,14 +88,14 @@ class SettingsView extends StatelessWidget {
                 ),
                 leading: Icon(
                   Icons.cancel,
-                  size: 40,
+                  size: 30,
                   color: mainColor,
                 ),
                 title: Text("Delete your winecellars"),
-                subtitle: Text("If you delete your database there is no return. "
-                    "Export it if you want to keep the data elsewhere."),
+                subtitle:
+                    Text("If you delete your database there is no return. "
+                        "Export it if you want to keep the data elsewhere."),
               ),
-
             ],
           ),
         ),

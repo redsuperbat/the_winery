@@ -8,7 +8,7 @@ class SearchModel extends BaseModel {
   SearchModel({WineService wineService}) : _wineService = wineService;
 
   Future<bool> getAllWine() async {
-    await _wineService.getAllWine();
+    // await _wineService.getAllWine();
     return true;
   }
 
@@ -20,6 +20,7 @@ class SearchModel extends BaseModel {
   }
 
   Future search(String query) async {
-    await _wineService.searchWine(query);
+    // TODO: Implement search
+    // await _wineService.searchWine(query);
   }
 }

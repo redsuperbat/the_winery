@@ -69,9 +69,10 @@ class WineService {
   }
 
   Future<void> filterWine() async {
-    final request = await _db.filter(cellar, subCategory, category);
+    // TODO: Filter wines implement
+    // final request = await _db.filter(cellar, subCategory, category);
     final List<Wine> wines = [];
-    request.forEach((w) => wines.add(Wine.fromJson(w)));
+    // request.forEach((w) => wines.add(Wine.fromJson(w)));
     _wines.add(wines);
   }
 
@@ -84,14 +85,17 @@ class WineService {
   }
 
   Future<List<Map<String, dynamic>>> getExportData() async {
-    final request = await _db.getTable(cellar);
-    return request;
+    // TODO: Implement this
+    // final request = await _db.getTable(cellar);
+    return [];
   }
 
   Future<void> getAllWine() async {
-    final request = await _db.getTable(cellar);
+    // TODO: Get wines from api
+
     final List<Wine> wines = [];
-    request.forEach((w) => wines.add(Wine.fromJson(w)));
+    // TODO: Implement json parsing
+    // request.forEach((w) => wines.add(Wine.fromJson(w)));
     _wines.add(wines);
   }
 
@@ -101,21 +105,23 @@ class WineService {
 
   Future<int> getStatistics({String column, String shouldEqual}) async {
     int sum = 0;
-    if (column != null && shouldEqual != null) {
-      final data = await _db.rawQuery(
-          "SELECT type, owned FROM $cellar WHERE $column = '$shouldEqual'");
-      data.forEach((m) => sum = sum + m['owned']);
-    } else {
-      final data = await _db.rawQuery("SELECT type, owned FROM $cellar");
-      data.forEach((m) => sum = sum + m['owned']);
-    }
+    // TODO: Implement frontend calculations of this
+    // if (column != null && shouldEqual != null) {
+    //   final data = await _db.rawQuery(
+    //       "SELECT type, owned FROM $cellar WHERE $column = '$shouldEqual'");
+    //   data.forEach((m) => sum = sum + m['owned']);
+    // } else {
+    //   final data = await _db.rawQuery("SELECT type, owned FROM $cellar");
+    //   data.forEach((m) => sum = sum + m['owned']);
+    // }
     return sum;
   }
 
   Future<double> getCellarWorth() async {
     double sum = 0;
-    final data = await _db.rawQuery("SELECT price, owned FROM $cellar");
-    data.forEach((m) => sum = sum + m['price'] * m['owned']);
+    // TODO: get cellar worth
+    // final data = await _db.rawQuery("SELECT price, owned FROM $cellar");
+    // data.forEach((m) => sum = sum + m['price'] * m['owned']);
     return sum;
   }
 

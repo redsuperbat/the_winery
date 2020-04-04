@@ -63,7 +63,8 @@ class AddWineFormModel extends BaseModel {
   }
 
   void listener() {
-    _wineService.searchWine(nameController.text);
+    // TODO: Implement search
+    // _wineService.searchWine(nameController.text);
     setName();
   }
 

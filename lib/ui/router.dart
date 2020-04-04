@@ -4,6 +4,7 @@ this is where you place all of your routes
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wine_cellar/ui/views/startup_view.dart';
 
 import 'views/add_view.dart';
 import 'views/cellar_edit_view.dart';
@@ -19,7 +20,7 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomeView());
+        return MaterialPageRoute(builder: (_) => StartupView());
       case 'add':
         return MaterialPageRoute(builder: (_) => Add());
       case 'wine':

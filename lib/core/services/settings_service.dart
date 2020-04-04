@@ -13,7 +13,7 @@ class Settings {
       _prefs = await SharedPreferences.getInstance();
       currency = _prefs.getString('currency') ?? "SEK";
       hasCreated = _prefs.getBool('hasCreated') ?? false;
-      print(hasCreated);
+      print("User has not been created");
     }
   }
 

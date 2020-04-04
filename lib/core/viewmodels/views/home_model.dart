@@ -51,7 +51,7 @@ class HomeModel extends BaseModel {
   Future iniAppData() async {
     print("Initializing the app data");
     await _settings.iniSettings();
-    await loadProfiles();
+    // await loadProfiles();
   }
 
   Future changeCellar(Profile profile) async {
@@ -65,9 +65,9 @@ class HomeModel extends BaseModel {
   }
 
   Future<void> loadProfiles() async {
-    print("loading profiles");
-    await _profileService.iniDb();
-    await _profileService.sinkProfiles();
+    // print("loading profiles");
+    // await _profileService.iniDb();
+    // await _profileService.sinkProfiles();
   }
 
   Future createCellar(String displayName) async {

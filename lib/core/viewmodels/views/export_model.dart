@@ -31,14 +31,6 @@ class ExportModel extends BaseModel {
     rows = [csvTitle];
   }
 
-  Future postWine() async {
-    await _api.exportCellar();
-  }
-
-  Future getCellar() async {
-    await _api.importCellar();
-  }
-
   void startExport() {
     export = !export;
     controller.clear();
@@ -50,7 +42,7 @@ class ExportModel extends BaseModel {
       return false;
     } else {
       final String filename = controller.text;
-      await getCurrentDatabase();
+      // await getCurrentDatabase();
       for (int i = 0; i < wines.length; i++) {
         List<String> row = List();
         row.add(wines[i]['name'] ?? "");

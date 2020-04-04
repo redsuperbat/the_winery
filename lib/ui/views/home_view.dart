@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
-import '../constants.dart';
 import 'base_widget.dart';
 import 'widgets/home_view/drawer.dart';
 import 'widgets/home_view/dropdown_filter.dart';
 import 'widgets/home_view/searchbar.dart';
-import 'widgets/home_view/welcome_dialog.dart';
 import 'widgets/home_view/wine_list.dart';
 
 class HomeView extends StatelessWidget {
@@ -20,27 +18,26 @@ class HomeView extends StatelessWidget {
         profileService: Provider.of(context),
       ),
       onModelReady: (model) async {
-
         await model.iniAppData();
-        if (!model.hasCreated)
-          await showDialog(
-              context: context,
-              builder: (_) => WelcomeDialog(
-                    title: Text(
-                      "Welcome to Cellar Tracker",
-                      style: titleStyle,
-                    ),
-                    content: Text(
-                      "Please specify the name of your first winecellar",
-                      textAlign: TextAlign.center,
-                    ),
-                    addCellar: (name) async {
-                      await model.createCellar(name);
-                      model.setHasCreated(true);
-                    },
-                  ),
-              barrierDismissible: false);
-        await model.iniDb();
+        // if (!model.hasCreated)
+        //   await showDialog(
+        //       context: context,
+        //       builder: (_) => WelcomeDialog(
+        //             title: Text(
+        //               "Welcome to Cellar Tracker",
+        //               style: titleStyle,
+        //             ),
+        //             content: Text(
+        //               "Please specify the name of your first winecellar",
+        //               textAlign: TextAlign.center,
+        //             ),
+        //             addCellar: (name) async {
+        //               await model.createCellar(name);
+        //               model.setHasCreated(true);
+        //             },
+        //           ),
+        //       barrierDismissible: false);
+        // await model.iniDb();
       },
       builder: (context, model, child) => Scaffold(
         appBar: model.search

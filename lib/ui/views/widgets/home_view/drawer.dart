@@ -12,7 +12,7 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    model.loadProfiles();
+    // model.loadProfiles();
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -63,7 +63,8 @@ class MyDrawer extends StatelessWidget {
                               : null,
                           addCellar: (name) => model.createCellar(name),
                           style: TextStyle(
-                              fontSize: 35, )),
+                            fontSize: 35,
+                          )),
                       accountName: Container(),
                       accountEmail: Container(
                         child: Text(

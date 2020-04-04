@@ -17,9 +17,9 @@ List<SingleChildWidget> providers = [
 
 List<SingleChildWidget> independentServices = [
   Provider.value(value: WineDb()),
-  // Provider.value(value: JsonService()),
+  Provider.value(value: JsonService()),
   Provider.value(value: Settings()),
-  Provider.value(value: DatabaseService()),
+  Provider.value(value: DatabaseService())
 ];
 
 List<SingleChildWidget> dependentServices = [
@@ -27,9 +27,6 @@ List<SingleChildWidget> dependentServices = [
     //The initial builder can instantiate some value for you if you want
     //initialBuilder: (wineService) => wineService.instantiateSomeValue(),
     update: (context, db, wineService) => WineService(database: db),
-  ),
-  ProxyProvider<WineDb, Api>(
-    update: (context, db, api) => Api(db),
   ),
   ProxyProvider<DatabaseService, ProfileService>(
     update: (context, db, profileService) => ProfileService(db: db),
