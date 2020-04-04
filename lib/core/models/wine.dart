@@ -1,33 +1,31 @@
 class Wine {
   String name;
-  int vintage;
+  String vintage;
   String type;
   String size;
-  String aoo;
+  String district;
   String country;
-  bool nv;
-  int id;
-  int owned;
+  String id;
+  int quantity;
   String grapes;
   String image;
   double rating;
   String comment;
   double price;
-  String time;
+  String date;
 
   Wine(
       {this.name,
       this.type,
-      this.aoo,
+      this.district,
       this.country,
       this.vintage,
       this.id,
       this.grapes,
-      this.owned = 1,
+      this.quantity = 1,
       this.size,
       this.image,
-      this.nv = false,
-      this.time,
+      this.date,
       this.comment,
       this.price = 0.0,
       this.rating = 0.0});
@@ -36,13 +34,12 @@ class Wine {
         'name': name,
         'type': type,
         'vintage': vintage,
-        'aoo': aoo,
+        'district': district,
         'country': country,
-        'nv': nv,
         'grapes': grapes,
-        'owned': owned,
+        'quantity': quantity,
         'size': size,
-        'time': time,
+        'date': date,
         'rating': rating,
         'comment': comment,
         'price': price,
@@ -55,14 +52,13 @@ class Wine {
     vintage = json['vintage'];
     id = json['id'];
     grapes = json['grapes'];
-    owned = json['owned'];
+    quantity = json['quantity'];
     size = json['size'];
     image = json['image'];
-    time = json['time'];
-    nv = json['nv'] == 0 ? false : true;
+    date = json['date'];
     rating = json['rating']?.toDouble();
     comment = json['comment'];
-    aoo = json['aoo'];
+    district = json['district'];
     country = json['country'];
     price = json['price']?.toDouble();
   }

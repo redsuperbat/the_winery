@@ -47,11 +47,11 @@ class ExportModel extends BaseModel {
         List<String> row = List();
         row.add(wines[i]['name'] ?? "");
         row.add(wines[i]['type'] ?? "");
-        row.add(wines[i]['aoo'] ?? "");
+        row.add(wines[i]['district'] ?? "");
         row.add(wines[i]['country'] ?? "");
         row.add(wines[i]['vintage'].toString());
         row.add(wines[i]['grapes'] ?? "");
-        row.add(wines[i]['owned'].toString());
+        row.add(wines[i]['quantity'].toString());
         row.add(wines[i]['size'] ?? "");
         row.add(wines[i]['image'] ?? "");
         row.add(wines[i]['time'] ?? "");

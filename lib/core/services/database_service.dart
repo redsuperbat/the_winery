@@ -6,12 +6,12 @@ class DatabaseService {
   static const cellarTable = "(id INTEGER PRIMARY KEY, "
       "name TEXT, "
       "vintage INTEGER, "
-      "aoo TEXT, "
+      "district TEXT, "
       "country TEXT, "
       "type TEXT, "
       "grapes TEXT, "
       "size TEXT, "
-      "owned INTEGER, "
+      "quantity INTEGER, "
       "time TEXT, "
       "comment TEXT, "
       "rating DOUBLE, "
@@ -63,11 +63,11 @@ class DatabaseService {
     int sum = 0;
     if (column != null && shouldEqual != null) {
       final data = await _db.rawQuery(
-          "SELECT type, owned FROM $table WHERE $column = '$shouldEqual'");
-      data.forEach((m) => sum = sum + m['owned']);
+          "SELECT type, quantity FROM $table WHERE $column = '$shouldEqual'");
+      data.forEach((m) => sum = sum + m['quantity']);
     } else {
-      final data = await _db.rawQuery("SELECT type, owned FROM $table");
-      data.forEach((m) => sum = sum + m['owned']);
+      final data = await _db.rawQuery("SELECT type, quantity FROM $table");
+      data.forEach((m) => sum = sum + m['quantity']);
     }
     return sum;
   }*/

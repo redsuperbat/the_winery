@@ -54,7 +54,8 @@ class WineService {
   }
 
   Future removeWine(Wine wine) async {
-    _db.remove(cellar, wine.id);
+    // TODO: Implement
+    // _db.remove(cellar, wine.id);
   }
 
   Future changeCellar(String cellarName) async {
@@ -77,8 +78,9 @@ class WineService {
   }
 
   Future<void> insertWine() async {
-    wine.id = await _db.getId(cellar);
-    wine.time = DateTime.now().toString();
+    // TODO: Send wine to db
+    // wine.id = await _db.getId(cellar);
+    // wine.time = DateTime.now().toString();
     print('wine image path is: ${wine.image}');
     await _db.insert(cellar, wine.toJson());
     await getAllWine();
@@ -108,11 +110,11 @@ class WineService {
     // TODO: Implement frontend calculations of this
     // if (column != null && shouldEqual != null) {
     //   final data = await _db.rawQuery(
-    //       "SELECT type, owned FROM $cellar WHERE $column = '$shouldEqual'");
-    //   data.forEach((m) => sum = sum + m['owned']);
+    //       "SELECT type, quantity FROM $cellar WHERE $column = '$shouldEqual'");
+    //   data.forEach((m) => sum = sum + m['quantity']);
     // } else {
-    //   final data = await _db.rawQuery("SELECT type, owned FROM $cellar");
-    //   data.forEach((m) => sum = sum + m['owned']);
+    //   final data = await _db.rawQuery("SELECT type, quantity FROM $cellar");
+    //   data.forEach((m) => sum = sum + m['quantity']);
     // }
     return sum;
   }
@@ -120,15 +122,16 @@ class WineService {
   Future<double> getCellarWorth() async {
     double sum = 0;
     // TODO: get cellar worth
-    // final data = await _db.rawQuery("SELECT price, owned FROM $cellar");
-    // data.forEach((m) => sum = sum + m['price'] * m['owned']);
+    // final data = await _db.rawQuery("SELECT price, quantity FROM $cellar");
+    // data.forEach((m) => sum = sum + m['price'] * m['quantity']);
     return sum;
   }
 
   Future decrementWine(Wine wine) async {
-    if (wine.owned == 0)
-      await removeWine(wine);
-    else
-      await updateWine(newWine: wine);
+    // TODO: IMPLEMENT decrement wine
+    // if (wine.quantity == 0)
+    //   await removeWine(wine);
+    // else
+    //   await updateWine(newWine: wine);
   }
 }

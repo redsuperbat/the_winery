@@ -7,45 +7,44 @@ import 'package:wine_cellar/ui/views/widgets/wine_view/property_changer.dart';
 import '../../base_widget.dart';
 
 class WineForm extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     print("wineform rebuilt");
     return BaseWidget<WineFormModel>(
       model: WineFormModel(wineService: Provider.of(context)),
       builder: (context, model, child) => Container(
-            width: MediaQuery.of(context).size.width / 1.2,
-            child: Column(
-                    children: <Widget>[
-                      PropertyChanger(
-                        controller: model.nameController,
-                        title: 'Brand name and Wineproducer',
-                      ),
-                      PropertyChanger(
-                        controller: model.grapeController,
-                        title: 'Grapes',
-                      ),
-                      PropertyChanger(
-                        controller: model.countryController,
-                        title: 'Country',
-                      ),
-                      PropertyChanger(
-                        controller: model.aooController,
-                        title: 'Appellation of origin',
-                      ),
-                      PropertyChanger(
-                        controller: model.priceController,
-                        keyBoardType: TextInputType.number,
-                        title: 'Price',
-                      ),
-                      PropertyChanger(
-                        controller: model.vintageController,
-                        keyBoardType: TextInputType.number,
-                        title: 'Vintage',
-                      ),
-                    ],
-                  ),
-          ),
+        width: MediaQuery.of(context).size.width / 1.2,
+        child: Column(
+          children: <Widget>[
+            PropertyChanger(
+              controller: model.nameController,
+              title: 'Brand name and Wineproducer',
+            ),
+            PropertyChanger(
+              controller: model.grapeController,
+              title: 'Grapes',
+            ),
+            PropertyChanger(
+              controller: model.countryController,
+              title: 'Country',
+            ),
+            PropertyChanger(
+              controller: model.districtController,
+              title: 'Appellation of origin',
+            ),
+            PropertyChanger(
+              controller: model.priceController,
+              keyBoardType: TextInputType.number,
+              title: 'Price',
+            ),
+            PropertyChanger(
+              controller: model.vintageController,
+              keyBoardType: TextInputType.number,
+              title: 'Vintage',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -58,7 +58,7 @@ const List<String> csvTitle = [
   "Cuntry of origin",
   "Vintage",
   "Grapes",
-  "Number of bottles owned",
+  "Number of bottles quantity",
   "Size of bottles",
   "Path to image",
   "DateTime of aquiring",

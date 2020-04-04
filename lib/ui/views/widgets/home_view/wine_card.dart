@@ -78,7 +78,10 @@ class WineCard extends StatelessWidget {
                               color: Colors.grey,
                               size: 80,
                             ),
-                            Text("No image\navailable", style: hintStyle,)
+                            Text(
+                              "No image\navailable",
+                              style: hintStyle,
+                            )
                           ],
                         )
                       : Image.asset(
@@ -104,7 +107,7 @@ class WineCard extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text('${wine.country ?? ""} ${wine.aoo ?? ""}'),
+                    Text('${wine.country ?? ""} ${wine.district ?? ""}'),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.40,
                       child: Text(
@@ -120,7 +123,7 @@ class WineCard extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(
-                        wine.nv ? "NV" : wine.vintage.toString(),
+                        wine.vintage,
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ),
@@ -131,12 +134,12 @@ class WineCard extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.all(5),
                       child: Text(
-                        '${wine.owned} st',
+                        '${wine.quantity} st',
                         style: TextStyle(fontSize: 20, color: Colors.red),
                       ),
                     ),
                     Container(
-                      child: Text(wine.time?.substring(0, 10)),
+                      child: Text(wine.date),
                     )
                   ],
                 ),

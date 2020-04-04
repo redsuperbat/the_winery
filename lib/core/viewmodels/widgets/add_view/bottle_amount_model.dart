@@ -12,7 +12,7 @@ class BottleAmountModel extends BaseModel {
 
   StreamSubscription subscription;
 
-  BottleAmountModel({WineService wineService}) : _wineService = wineService{
+  BottleAmountModel({WineService wineService}) : _wineService = wineService {
     subscription = wineStream.listen((wine) => setPriceFromStream(wine));
   }
 
@@ -28,21 +28,21 @@ class BottleAmountModel extends BaseModel {
     super.dispose();
   }
 
-  void setPriceFromStream(Wine wine){
-    controller.text = '${wine.owned}';
+  void setPriceFromStream(Wine wine) {
+    controller.text = '${wine.quantity}';
   }
 
   void increment() {
-    if (wine.owned != 999) {
-      wine.owned++;
-      controller.text = '${wine.owned}';
+    if (wine.quantity != 999) {
+      wine.quantity++;
+      controller.text = '${wine.quantity}';
     }
   }
 
   void decrement() {
-    if (wine.owned != 0) {
-      wine.owned--;
-      controller.text = '${wine.owned}';
+    if (wine.quantity != 0) {
+      wine.quantity--;
+      controller.text = '${wine.quantity}';
     }
   }
 }

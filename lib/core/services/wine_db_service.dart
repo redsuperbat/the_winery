@@ -16,12 +16,12 @@ class WineDb {
                   "id INTEGER PRIMARY KEY, "
                   "name TEXT, "
                   "vintage INTEGER, "
-                  "aoo TEXT, "
+                  "district TEXT, "
                   "country TEXT, "
                   "type TEXT, "
                   "grapes TEXT, "
                   "size TEXT, "
-                  "owned INTEGER, "
+                  "quantity INTEGER, "
                   "time TEXT, "
                   "comment TEXT, "
                   "rating DOUBLE, "
@@ -38,12 +38,12 @@ class WineDb {
         "id INTEGER PRIMARY KEY, "
         "name TEXT, "
         "vintage INTEGER, "
-        "aoo TEXT, "
+        "district TEXT, "
         "country TEXT, "
         "type TEXT, "
         "grapes TEXT, "
         "size TEXT, "
-        "owned INTEGER, "
+        "quantity INTEGER, "
         "time TEXT, "
         "comment TEXT, "
         "rating DOUBLE, "
@@ -69,8 +69,8 @@ class WineDb {
 /*  Future<double> getCellarWorth() async {
     double sum = 0;
     final data =
-        await database.rawQuery("SELECT price, owned FROM $currentTable");
-    data.forEach((m) => sum = sum + m['price'] * m['owned']);
+        await database.rawQuery("SELECT price, quantity FROM $currentTable");
+    data.forEach((m) => sum = sum + m['price'] * m['quantity']);
     print('Data is: $data sum is $sum');
     return sum;
   }*/
@@ -79,12 +79,12 @@ class WineDb {
     int sum = 0;
     if (column != null && shouldEqual != null) {
       final data = await database.rawQuery(
-          "SELECT type, owned FROM $currentTable WHERE $column = '$shouldEqual'");
-      data.forEach((m) => sum = sum + m['owned']);
+          "SELECT type, quantity FROM $currentTable WHERE $column = '$shouldEqual'");
+      data.forEach((m) => sum = sum + m['quantity']);
     } else {
       final data =
-          await database.rawQuery("SELECT type, owned FROM $currentTable");
-      data.forEach((m) => sum = sum + m['owned']);
+          await database.rawQuery("SELECT type, quantity FROM $currentTable");
+      data.forEach((m) => sum = sum + m['quantity']);
     }
     return sum;
   }*/

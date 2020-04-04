@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 class WineFormModel extends BaseModel {
   final WineService _wineService;
 
-
-  TextEditingController aooController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController grapeController = TextEditingController();
@@ -16,7 +15,7 @@ class WineFormModel extends BaseModel {
   TextEditingController countryController = TextEditingController();
 
   WineFormModel({WineService wineService}) : _wineService = wineService {
-    aooController = TextEditingController(text: wine.aoo ?? "");
+    districtController = TextEditingController(text: wine.district ?? "");
     nameController = TextEditingController(text: wine.name ?? "");
     grapeController = TextEditingController(text: wine.grapes ?? "");
     priceController = TextEditingController(
@@ -24,9 +23,8 @@ class WineFormModel extends BaseModel {
     vintageController = TextEditingController(text: wine.vintage.toString());
     countryController = TextEditingController(text: wine.country ?? "");
 
-
     nameController.addListener(setName);
-    aooController.addListener(setAoo);
+    districtController.addListener(setdistrict);
     grapeController.addListener(setGrapes);
     priceController.addListener(setPrice);
     countryController.addListener(setCountry);
@@ -35,13 +33,12 @@ class WineFormModel extends BaseModel {
 
   Wine get wine => _wineService.wine;
 
-
   void setName() {
     wine.name = nameController.text;
   }
 
-  void setAoo() {
-    wine.aoo = aooController.text;
+  void setdistrict() {
+    wine.district = districtController.text;
   }
 
   void setPrice() {
@@ -53,7 +50,7 @@ class WineFormModel extends BaseModel {
   }
 
   void setVintage() {
-    wine.vintage = int.tryParse(vintageController.text);
+    wine.vintage = vintageController.text;
   }
 
   void setCountry() {

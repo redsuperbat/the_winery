@@ -11,7 +11,7 @@ class AddWineFormModel extends BaseModel {
   final Settings _settings;
 
   final FocusNode focusNode = FocusNode();
-  final TextEditingController aooController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController grapeController = TextEditingController();
@@ -22,7 +22,7 @@ class AddWineFormModel extends BaseModel {
       : _wineService = wineService,
         _settings = settings {
     nameController.addListener(listener);
-    aooController.addListener(setAoo);
+    districtController.addListener(setdistrict);
     grapeController.addListener(setGrapes);
     priceController.addListener(setPrice);
   }
@@ -42,7 +42,7 @@ class AddWineFormModel extends BaseModel {
     nameController.dispose();
     priceController.dispose();
     grapeController.dispose();
-    aooController.dispose();
+    districtController.dispose();
     print("Disposing AddWineFormModel");
     super.dispose();
   }
@@ -56,7 +56,7 @@ class AddWineFormModel extends BaseModel {
     nameController.text = wine.name ?? "";
     priceController.text = wine.price == null ? "" : wine.price.toString();
     grapeController.text = wine.grapes ?? "";
-    aooController.text = wine.aoo;
+    districtController.text = wine.district;
     _wineService.wineSink.add(wine);
     showSearch = false;
     notifyListeners();
@@ -72,8 +72,8 @@ class AddWineFormModel extends BaseModel {
     wine.name = nameController.text;
   }
 
-  void setAoo() {
-    wine.aoo = aooController.text;
+  void setdistrict() {
+    wine.district = districtController.text;
   }
 
   void setPrice() {

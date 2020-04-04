@@ -74,22 +74,20 @@ class WineView extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    width: MediaQuery.of(context).size.width*0.43,
+                    width: MediaQuery.of(context).size.width * 0.43,
                     child: Card(
                       margin: EdgeInsets.only(top: 25),
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Column(
                           children: <Widget>[
-                            if (wine.country != null && wine.aoo != null)
+                            if (wine.country != null && wine.district != null)
                               WineInfo(
                                   title: 'Country & Appelation',
                                   text:
-                                      '${wine.country ?? ""} ${wine.aoo ?? ""}'),
-                            if (!wine.nv)
-                              WineInfo(
-                                  title: "Vintage",
-                                  text: wine.vintage.toString()),
+                                      '${wine.country ?? ""} ${wine.district ?? ""}'),
+                            if (wine.vintage != null)
+                              WineInfo(title: "Vintage", text: wine.vintage),
                             if (wine.grapes != null)
                               WineInfo(
                                 text: wine.grapes,
@@ -130,7 +128,7 @@ class WineView extends StatelessWidget {
                 ),
               ),
               Text(
-                'Placed in cellar: ${wine.time.substring(0, 16)}',
+                'Placed in cellar: ${wine.date}',
                 textAlign: TextAlign.center,
                 style: TextStyle(),
               ),
