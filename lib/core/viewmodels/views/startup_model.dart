@@ -7,7 +7,21 @@ class StartupModel extends BaseModel {
 
   StartupModel({starterView, userService}) : _userService = userService;
 
+  String get starterView => _starterView;
+
   Future<void> init() async {
+    print("Initing startup");
     await _userService.initUser();
+    if (_userService.isLoggedIn()) {
+      _starterView = "home";
+    } else {
+      _starterView = "register";
+    }
+  }
+
+  Future<void> test() async {
+    setBusy(true);
+    print(await _userService.login("admin@admn.com", "password"));
+    setBusy(false);
   }
 }

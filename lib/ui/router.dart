@@ -21,6 +21,8 @@ class Router {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => StartupView());
+      case 'home':
+        return MaterialPageRoute(builder: (_) => HomeView());
       case 'add':
         return MaterialPageRoute(builder: (_) => Add());
       case 'wine':

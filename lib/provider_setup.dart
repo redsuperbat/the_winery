@@ -6,6 +6,7 @@ import 'core/services/database_service.dart';
 import 'core/services/json_service.dart';
 import 'core/services/profile_service.dart';
 import 'core/services/settings_service.dart';
+import 'core/services/user_service.dart';
 import 'core/services/wine_db_service.dart';
 import 'core/services/wine_service.dart';
 
@@ -19,7 +20,8 @@ List<SingleChildWidget> independentServices = [
   Provider.value(value: WineDb()),
   Provider.value(value: JsonService()),
   Provider.value(value: Settings()),
-  Provider.value(value: DatabaseService())
+  Provider.value(value: DatabaseService()),
+  Provider.value(value: UserService())
 ];
 
 List<SingleChildWidget> dependentServices = [

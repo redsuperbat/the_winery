@@ -16,14 +16,26 @@ class UserService {
     if (_prefs.containsKey('token')) {
       final token = _prefs.getString('token');
       if (await verifyToken(token)) {
+        _user = User(
+            email: _prefs.getString('email'), token: _prefs.getString('token'));
       } else {
-        _user = await login(
-            _prefs.getString('email'), _prefs.getString('password'));
+        String email = _prefs.getString('email');
+        Map<String, dynamic> response =
+            await login(email, _prefs.getString("password"));
+        _user = User.fromJson(response);
       }
     }
   }
 
   User get user => _user;
+
+  bool isLoggedIn() {
+    if (user == null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   Future<bool> verifyToken(String token) async {
     final res = await http
@@ -35,27 +47,30 @@ class UserService {
     }
   }
 
-  Future<User> login(String email, String password) async {
-    User user;
+  Future<Map<String, dynamic>> login(String email, String password) async {
+    Map<String, dynamic> decoded;
     await http
         .post('$endPoint/users/login',
             headers: {'Accept': 'application/json'},
             body: {'email': email, 'password': password})
-        .then((res) => user = User.fromJson(json.decode(res.body)[0]))
-        .catchError((err) => print(err));
-    return (user);
+        .then((res) => decoded = json.decode(res.body))
+        .catchError((err) => decoded = json.decode(err));
+    return (decoded);
   }
 
-  Future<User> register(String email, String password, String username) async {
+  Future<Map> register(String email, String password) async {
     User user;
+    Map result = {"message": "Auth successful"};
     await http
         .post('$endPoint/users/register',
             headers: {'Accept': 'application/json'},
-            body: {'email': email, 'password': password, 'username': username})
-        .then((res) => user = User.fromJson(json.decode(res.body)[0]))
-        .catchError((err) => print(err));
-    return (user);
+            body: {'email': email, 'password': password})
+        .then((res) => user = User.fromJson(json.decode(res.body)))
+        .catchError((err) => result = json.decode(err));
+    _user = user;
+    _prefs.setString('token', user.token);
+    _prefs.setString('password', password);
+    _prefs.setString('email', user.email);
+    return result;
   }
-
-  Future<bool> isLoggedin() async {}
 }
