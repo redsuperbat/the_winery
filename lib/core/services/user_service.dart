@@ -1,6 +1,5 @@
 import 'package:wine_cellar/core/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'api.dart';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -18,6 +17,7 @@ class UserService {
       if (await verifyToken(token)) {
         _user = User(
             email: _prefs.getString('email'), token: _prefs.getString('token'));
+        print(_user);
       } else {
         String email = _prefs.getString('email');
         Map<String, dynamic> response =
@@ -30,9 +30,11 @@ class UserService {
   User get user => _user;
 
   bool isLoggedIn() {
+    print("checking if user is logged in");
     if (user == null) {
       return false;
     } else {
+      print("returning true");
       return true;
     }
   }
@@ -68,6 +70,7 @@ class UserService {
         .then((res) => user = User.fromJson(json.decode(res.body)))
         .catchError((err) => result = json.decode(err));
     _user = user;
+    print(user);
     _prefs.setString('token', user.token);
     _prefs.setString('password', password);
     _prefs.setString('email', user.email);

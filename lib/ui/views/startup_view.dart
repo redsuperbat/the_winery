@@ -11,9 +11,18 @@ class StartupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<StartupModel>(
-        model: StartupModel(userService: Provider.of<UserService>(context)),
-        onModelReady: (model) async => await model.init(),
-        builder: (context, model, child) =>
-            model.starterView == "home" ? HomeView() : RegisterView());
+      model: StartupModel(userService: Provider.of<UserService>(context)),
+      onModelReady: (model) => model.init(),
+      builder: (context, model, child) => StreamBuilder(
+        stream: model.stream,
+        builder: (context, snapshot) => snapshot.hasData
+            ? snapshot.data == "register" ? RegisterView() : HomeView()
+            : Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+      ),
+    );
   }
 }
