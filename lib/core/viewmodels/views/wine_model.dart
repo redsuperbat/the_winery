@@ -17,6 +17,8 @@ class WineModel extends BaseModel {
   File image;
   String get wineImageFilePath => _wineService.wineImageFilePath;
 
+  Map updateOps = {};
+
   WineModel({@required WineService wineService, @required Settings settings})
       : _wineService = wineService,
         _settings = settings;
@@ -27,12 +29,12 @@ class WineModel extends BaseModel {
 
   @override
   void dispose() {
-    print("Disposing AddModel");
+    print("Disposing WineModel");
     super.dispose();
   }
 
   Future<bool> updateWine(Wine wine) async {
-    await _wineService.updateWine(newWine: wine);
+    await _wineService.updateWine(updateOps, wine.id);
     await _wineService.getAllWine();
     return true;
   }
@@ -42,17 +44,19 @@ class WineModel extends BaseModel {
     if (image != null) {
       _wineService.wineImageFilePath = image.path;
       print(wineImageFilePath);
-      await updateWine(wine);
+      // await updateWine(wine);
       notifyListeners();
     }
   }
 
   void setRating(double value, Wine wine) {
     wine.rating = value;
+    updateOps['rating'] = value;
     notifyListeners();
   }
 
   void setComments(String value, Wine wine) {
     wine.comment = value;
+    updateOps['comment'] = value;
   }
 }

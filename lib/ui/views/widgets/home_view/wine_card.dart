@@ -33,7 +33,7 @@ class WineCard extends StatelessWidget {
               ),
               color: Colors.red[300],
             ),
-            onTap: () => onRemove(wine),
+            onTap: () => model.removeWine(wine),
           ),
         ],
         secondaryActions: <Widget>[

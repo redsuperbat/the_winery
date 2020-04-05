@@ -19,11 +19,14 @@ class AddModel extends BaseModel {
 
   Future<void> addWine() async {
     await _wineService.addWine();
+    if (_wineService.wineImageFilePath != null) {
+      File(_wineService.wineImageFilePath).delete();
+    }
   }
 
   Future<void> getImage() async {
     image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 30);
+        source: ImageSource.camera, imageQuality: 15);
     _wineService.wineImageFilePath = image.path;
     print(_wineService.wineImageFilePath);
     notifyListeners();

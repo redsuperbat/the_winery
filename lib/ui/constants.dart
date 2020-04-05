@@ -26,7 +26,15 @@ const TextStyle hintStyle = TextStyle(
   color: Colors.black54,
   fontStyle: FontStyle.italic,
 );
-const List<String> wineSizes = ["375mL", "750mL", "1.5L", "3L", "6L"];
+const List<String> wineSizes = [
+  "375mL",
+  "750mL",
+  "1.5L",
+  "3L",
+  "6L",
+  "9L",
+  "12L"
+];
 
 const List<String> countryNames = [
   "Argentina",

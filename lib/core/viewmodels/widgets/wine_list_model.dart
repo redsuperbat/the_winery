@@ -19,8 +19,9 @@ class WineListModel extends BaseModel {
     await _wineService.getAllWine();
   }
 
+  // Deprecated Method
   Future<void> removeWine(Wine wine) async {
-    await _wineService.removeWine(wine);
+    // await _wineService.removeWine(wine);
     notifyListeners();
   }
 }

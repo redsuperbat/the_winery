@@ -22,10 +22,10 @@ class WineList extends StatelessWidget {
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) => WineCard(
                       wine: snapshot.data[index],
-                      onRemove: (wine) {
-                        snapshot.data.remove(wine);
-                        model.removeWine(wine);
-                      },
+                      // onRemove: (wine) {
+                      //   snapshot.data.remove(wine);
+                      //   model.removeWine(wine);
+                      // },
                     ),
                     //WineCard(wine: model.wines[index]),
                   ),

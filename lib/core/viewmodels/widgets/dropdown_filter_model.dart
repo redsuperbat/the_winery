@@ -18,14 +18,14 @@ class DropdownFilterModel extends BaseModel {
   Future setSubType(String value) async {
     if (value != null) {
       wineService.subTypeSink.add(value);
-      print("Setting subtype to $value");
+      print("Setting subcategory to $value");
       wineService.subCategory = value;
       await wineService.filterWine();
     }
   }
 
   void setType(String value) async {
-    print("Setting type to $value");
+    print("Setting category to $value");
     wineService.category = value;
     type = value;
   }
@@ -35,5 +35,5 @@ class DropdownFilterModel extends BaseModel {
     await wineService.getAllWine();
   }
 
-  List<String> get category => ["show all", "Type", "Size"];
+  List<String> get category => ["show all", "type", "size"];
 }

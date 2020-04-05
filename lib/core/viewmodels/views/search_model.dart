@@ -8,7 +8,7 @@ class SearchModel extends BaseModel {
   SearchModel({WineService wineService}) : _wineService = wineService;
 
   Future<bool> getAllWine() async {
-    // await _wineService.getAllWine();
+    await _wineService.getAllWine();
     return true;
   }
 
@@ -19,8 +19,7 @@ class SearchModel extends BaseModel {
     super.dispose();
   }
 
-  Future search(String query) async {
-    // TODO: Implement search
-    // await _wineService.searchWine(query);
+  void search(String query) {
+    _wineService.searchWine(query);
   }
 }

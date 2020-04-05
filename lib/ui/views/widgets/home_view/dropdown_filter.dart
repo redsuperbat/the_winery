@@ -37,7 +37,7 @@ class DropdownFilter extends StatelessWidget {
                     await showMenu(
                       context: context,
                       position: RelativeRect.fromLTRB(100.0, 40.0, 30.0, 100.0),
-                      items: model.type == "Type"
+                      items: model.type == "type"
                           ? wineCategories
                               .map((t) => PopupMenuItem(
                                     child: Text(t),

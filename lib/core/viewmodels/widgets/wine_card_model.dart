@@ -9,12 +9,15 @@ class WineCardModel extends BaseModel {
   WineCardModel({WineService wineService}) : _wineService = wineService;
 
   void removeWine(Wine wine) {
-    _wineService.removeWine(wine);
+    _wineService.updateWine({'archived': true}, wine.id);
+    wine.archived = true;
+    notifyListeners();
   }
 
-  Future increment(Wine wine) async {
+  void increment(Wine wine) {
     wine.quantity++;
-    await _wineService.updateWine(newWine: wine);
+    Map updateOps = {'quantity': wine.quantity};
+    _wineService.updateWine(updateOps, wine.id);
     notifyListeners();
   }
 
@@ -23,8 +26,16 @@ class WineCardModel extends BaseModel {
   }
 
   Future decrement(Wine wine) async {
-    wine.quantity--;
-    await _wineService.decrementWine(wine);
-    notifyListeners();
+    if (wine.quantity > 1) {
+      wine.quantity--;
+      Map updateOps = {'quantity': wine.quantity};
+      _wineService.updateWine(updateOps, wine.id);
+      notifyListeners();
+    } else {
+      wine.archived = true;
+      Map updateOps = {'archived': wine.archived};
+      _wineService.updateWine(updateOps, wine.id);
+      notifyListeners();
+    }
   }
 }

@@ -13,6 +13,7 @@ import 'package:wine_cellar/core/services/user_service.dart';
 
 class WineService {
   // final DatabaseService _db;
+
   final UserService _userService;
   final StreamController<String> _subType = StreamController.broadcast();
   final StreamController<List<Wine>> _wines = StreamController.broadcast();
@@ -20,8 +21,8 @@ class WineService {
 
   static const String endpoint = 'http://rest1.dizzyhouse.com/api';
 
-  static final Dio dio =
-      Dio(BaseOptions(baseUrl: 'http://rest1.dizzyhouse.com/api'));
+  // static final Dio dio =
+  //     Dio(BaseOptions(baseUrl: 'http://rest1.dizzyhouse.com/api'));
 
   WineService({@required UserService userService}) : _userService = userService;
 
@@ -35,7 +36,9 @@ class WineService {
 
   Stream<List<Wine>> get wines => _wines.stream;
 
-  List<Wine> cachedWines;
+  List<Wine> cachedWines = [];
+
+  List<Wine> activeWines = [];
 
   String wineImageFilePath;
 
@@ -55,24 +58,26 @@ class WineService {
     wine = Wine();
   }
 
-  Future<void> initializeDb(String cellarName) async {
-    cellar = cellarName;
-    if (cellar != null) {
-      await getAllWine();
-    }
-  }
-
-  Future<void> searchWine(String query) async {
-    // TODO: IMPLEMENT search wines
-    final List<Wine> wines = [];
-    // final response = await _db.search(cellar, 'name', query);
-    // response.forEach((w) => wines.add(Wine.fromJson(w)));
-    _wines.add(wines);
-  }
-
-  Future removeWine(Wine wine) async {
-    // TODO: Implement
-    // _db.remove(cellar, wine.id);
+  void searchWine(String query) {
+    List<Wine> searchWines = activeWines.where((Wine wine) {
+      bool returner = false;
+      Map attrsToSearch = {
+        "name": wine.name,
+        "vintage": wine.vintage,
+        "district": wine.district,
+        "grapes": wine.grapes,
+        "type": wine.type,
+        "size": wine.size,
+        "country": wine.country
+      };
+      // set returner to true if the query matches any of the attributes we want to search.
+      attrsToSearch.forEach((key, value) =>
+          value.toString().toLowerCase().contains(query.toLowerCase())
+              ? returner = true
+              : null);
+      return returner;
+    }).toList();
+    _wines.add(searchWines);
   }
 
   Future changeCellar(String cellarName) async {
@@ -88,38 +93,53 @@ class WineService {
   }
 
   Future<void> filterWine() async {
-    // TODO: Filter wines implement
-    // final request = await _db.filter(cellar, subCategory, category);
-    final List<Wine> wines = [];
-    // request.forEach((w) => wines.add(Wine.fromJson(w)));
-    _wines.add(wines);
+    List<Wine> filteredWines = activeWines
+        .where((wine) => wine.toJson()[category] == subCategory)
+        .toList();
+    _wines.add(filteredWines);
+  }
+
+  void sinkActiveWines() {
+    activeWines = cachedWines.where((wine) => !wine.archived).toList();
+    activeWines.sort((f, s) => f.date.compareTo(s.date));
+    _wines.add(activeWines);
   }
 
   Future<void> addWine() async {
     var request = http.MultipartRequest("POST", Uri.parse('$endpoint/wines'));
-    request.files.add(await http.MultipartFile.fromPath(
-        "image", wineImageFilePath,
-        contentType: MediaType('image', 'jpg')));
+    // only add image to request if user submits an image
+    if (wineImageFilePath != null) {
+      request.files.add(await http.MultipartFile.fromPath(
+          "image", wineImageFilePath,
+          contentType: MediaType('image', 'jpg')));
+    }
     request.headers.addAll({"Authorization": 'Bearer ${_userService.token}'});
+
+    // Remove all values from wine that is not populated
     final Map filteredMap = wine.toJson()
       ..removeWhere((key, value) => value == null);
+
+    // Convert all populated values to string
     final Map<String, String> map =
         filteredMap.map((key, value) => MapEntry(key, value.toString()));
     request.fields.addAll(map);
     Wine fetchedWine;
+
+    // Send request
     final response = await request.send();
-    if (response.statusCode == 200) {
-      response.stream
-          .transform(utf8.decoder)
-          .listen((res) => fetchedWine = Wine.fromJson(json.decode(res)));
-      cachedWines.add(fetchedWine);
-      _wines.add(cachedWines);
+    if (response.statusCode == 201) {
+      response.stream.transform(utf8.decoder).listen((res) {
+        fetchedWine = Wine.fromJson(json.decode(res));
+        cachedWines.add(fetchedWine);
+        sinkActiveWines();
+      });
     } else {
       print(response.statusCode);
       response.stream.transform(utf8.decoder).listen((res) => print(res));
     }
   }
 
+  // DEPRECATED TO BE REMOVED
   Future<List<Map<String, dynamic>>> getExportData() async {
     // TODO: Implement this
     // final request = await _db.getTable(cellar);
@@ -127,27 +147,39 @@ class WineService {
   }
 
   Future<void> getAllWine() async {
-    final response = await dio.get('/wines',
-        options: Options(
-            headers: {'Authorization': 'Bearer ${_userService.token}'}));
+    final response = await http.get('$endpoint/wines',
+        headers: {'Authorization': 'Bearer ${_userService.token}'});
+    final decoded = json.decode(response.body);
     if (response.statusCode == 200) {
       List<Wine> wines;
-      if (response.data.length > 0) {
-        wines = response.data.map<Wine>((wine) => Wine.fromJson(wine)).toList();
+      if (decoded.length > 0) {
+        wines = decoded.map<Wine>((wine) => Wine.fromJson(wine)).toList();
       } else {
         wines = [];
       }
       cachedWines = wines;
-      _wines.add(cachedWines);
+      // Checking if wine is archived or not, shows only archived wines.
+      sinkActiveWines();
     } else {
-      // If token fails, get new token and try again..
-      _userService.initUser().then((value) => getAllWine());
+      // If token fails, wait 2 seconds get new token and try again..
+      Timer.periodic(Duration(seconds: 2),
+          (t) => _userService.initUser().then((value) => getAllWine()));
     }
   }
 
-  Future<void> updateWine({Wine newWine}) async {
-    // TODO: Implement updating wine
-    // await _db.update(cellar, newWine?.toJson() ?? wine.toJson());
+  Future<void> updateWine(Map updateOps, String id) async {
+    print(json.encode(updateOps));
+    final response = await http.patch('$endpoint/wines/$id',
+        headers: {
+          'Authorization': 'Bearer ${_userService.token}',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode(updateOps));
+
+    // sink wines that are not archived.
+    sinkActiveWines();
+    print(response.body);
   }
 
   Future<int> getStatistics({String column, String shouldEqual}) async {
@@ -170,13 +202,5 @@ class WineService {
     // final data = await _db.rawQuery("SELECT price, quantity FROM $cellar");
     // data.forEach((m) => sum = sum + m['price'] * m['quantity']);
     return sum;
-  }
-
-  Future decrementWine(Wine wine) async {
-    // TODO: IMPLEMENT decrement wine
-    // if (wine.quantity == 0)
-    //   await removeWine(wine);
-    // else
-    //   await updateWine(newWine: wine);
   }
 }
