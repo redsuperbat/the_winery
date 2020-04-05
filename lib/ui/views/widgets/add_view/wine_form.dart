@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/viewmodels/widgets/add_view/add_wine_form_model.dart';
+import 'package:wine_cellar/ui/constants.dart';
 
 import '../../base_widget.dart';
 
@@ -21,8 +23,7 @@ class AddWineForm extends StatelessWidget {
                   focusNode: model.focusNode,
                   onTap: () => model.showWineSearch(),
                   controller: model.nameController,
-                  decoration:
-                      InputDecoration(hintText: 'Brand Name & Wine Producer'),
+                  decoration: InputDecoration(hintText: 'Name & Producer'),
                 ),
                 TextField(
                   controller: model.grapeController,
@@ -39,7 +40,7 @@ class AddWineForm extends StatelessWidget {
                         Icons.info,
                       ),
                     ),
-                    hintText: 'Appellation of origin',
+                    hintText: 'District',
                   ),
                 ),
                 TextField(
@@ -60,53 +61,70 @@ class AddWineForm extends StatelessWidget {
               ],
             ),
             StreamBuilder(
-                stream: model.wines,
-                builder: (context, AsyncSnapshot<List> snapshot) => snapshot
-                            .hasData &&
-                        snapshot.data.length != 0 &&
-                        model.text != "" &&
-                        model.showSearch &&
-                        model.focusNode.hasFocus
-                    ? Container(
-                        color: Colors.transparent,
-                        margin: EdgeInsets.only(top: 48, right: 5),
-                        child: LimitedBox(
-                          maxHeight: snapshot.data.length.toDouble() * 45,
-                          maxWidth: double.infinity,
-                          child: Card(
-                            margin: EdgeInsets.zero,
-                            elevation: 4,
-                            child: ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: snapshot.data.length,
-                              itemBuilder: (context, index) => Container(
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border(
-                                        bottom:
-                                            BorderSide(color: Colors.black54))),
-                                height: 45,
-                                child: InkWell(
-                                  child: Row(
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          snapshot.data[index].name ?? "",
-                                          style: TextStyle(fontSize: 17),
-                                        ),
+                stream: model.stream,
+                builder: (context, AsyncSnapshot<List<Wine>> snapshot) =>
+                    snapshot.hasData &&
+                            snapshot.data.length != 0 &&
+                            model.text != "" &&
+                            model.showSearch &&
+                            model.focusNode.hasFocus
+                        ? Container(
+                            color: Colors.transparent,
+                            margin: EdgeInsets.only(
+                              top: 48,
+                            ),
+                            child: LimitedBox(
+                              maxHeight: snapshot.data.length.toDouble() * 45,
+                              maxWidth: double.infinity,
+                              child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) => Card(
+                                  margin: EdgeInsets.all(0),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.black54))),
+                                    height: 45,
+                                    child: InkWell(
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.61,
+                                            child: Text(
+                                              snapshot.data[index].name ?? "",
+                                              style: TextStyle(fontSize: 17),
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                                color: accentColor,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(15))),
+                                            child: Text(
+                                              "Quickadd!",
+                                              style: TextStyle(fontSize: 9),
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    ],
+                                      onTap: () => model.setWine(
+                                          snapshot.data[index].toJson()),
+                                    ),
                                   ),
-                                  onTap: () =>
-                                      model.setWine(snapshot.data[index]),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      )
-                    : Container()),
+                          )
+                        : Container()),
           ],
         ),
       ),

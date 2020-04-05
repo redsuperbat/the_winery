@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/models/profile.dart';
+// import 'package:wine_cellar/core/models/profile.dart';
 import 'package:wine_cellar/core/viewmodels/views/settings_model.dart';
 
 import '../../../constants.dart';
@@ -18,54 +18,56 @@ class Cellars extends StatelessWidget {
         size: 40,
       ),
       title: Text("Edit your Cellars"),
-      subtitle: StreamBuilder<List<Profile>>(
-          stream: model.profiles,
+      subtitle: StreamBuilder<List>(
+          // stream: model.profiles,
           builder: (context, snapshot) {
-            final double itemExtent = MediaQuery.of(context).size.height * 0.1;
-            return snapshot.hasData
-                ? Container(
-                    height: itemExtent * snapshot.data.length,
-                    child: ListView.builder(
-                      itemExtent: itemExtent,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context, index) => model.index == index
-                          ? OptionsTile(
-                              profile: snapshot.data[index],
-                            )
-                          : Card(
-                              elevation: 2,
-                              child: ListTile(
-                                onTap: () => print("tappin"),
-                                onLongPress: () => model.showOptions(index),
-                                leading: Padding(
-                                  padding: EdgeInsets.only(top: 7),
-                                  child: CircleAvatar(
-                                    child: Text(
-                                      snapshot.data[index].displayName
-                                          .substring(0, 1)
-                                          .toUpperCase(),
-                                    ),
-                                  ),
+        final double itemExtent = MediaQuery.of(context).size.height * 0.1;
+        return snapshot.hasData
+            ? Container(
+                height: itemExtent * snapshot.data.length,
+                child: ListView.builder(
+                  itemExtent: itemExtent,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) => model.index == index
+                      ? OptionsTile(
+                          // profile: snapshot.data[index],
+                          )
+                      : Card(
+                          elevation: 2,
+                          child: ListTile(
+                            onTap: () => print("tappin"),
+                            onLongPress: () => model.showOptions(index),
+                            leading: Padding(
+                              padding: EdgeInsets.only(top: 7),
+                              child: CircleAvatar(
+                                child: Text(
+                                  snapshot.data[index].displayName
+                                      .substring(0, 1)
+                                      .toUpperCase(),
                                 ),
-                                title: Row(children: [
-                                  Text(snapshot.data[index].displayName)
-                                ]),
-                                dense: true,
                               ),
                             ),
-                    ),
-                  )
-                : Container();
-          }),
+                            title: Row(children: [
+                              Text(snapshot.data[index].displayName)
+                            ]),
+                            dense: true,
+                          ),
+                        ),
+                ),
+              )
+            : Container();
+      }),
     );
   }
 }
 
 class OptionsTile extends StatefulWidget {
-  final Profile profile;
+  // final Profile profile;
 
-  const OptionsTile({Key key, this.profile}) : super(key: key);
+  const OptionsTile({
+    Key key,
+  }) : super(key: key);
 
   @override
   _OptionsTileState createState() => _OptionsTileState();
@@ -107,11 +109,11 @@ class _OptionsTileState extends State<OptionsTile>
           onTap: () => print("tappin"),
           leading: AnimatedBuilder(
             animation: _animation2,
-            builder: (context,child) =>  CircleAvatar(
+            builder: (context, child) => CircleAvatar(
               foregroundColor: Colors.red,
               backgroundColor: _animation2.value,
               child: Text(
-                widget.profile.displayName.substring(0, 1).toUpperCase(),
+                "widget.displayName.substring(0, 1).toUpperCase()",
               ),
             ),
           ),
@@ -119,10 +121,9 @@ class _OptionsTileState extends State<OptionsTile>
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.edit),
-                splashColor: Colors.red,
-                onPressed: () => Navigator.pushNamed(context, 'cellar-edit',arguments: widget.profile),
-              ),
+                  icon: Icon(Icons.edit),
+                  splashColor: Colors.red,
+                  onPressed: () => {}),
               IconButton(
                 icon: Icon(Icons.delete),
                 splashColor: Colors.red,

@@ -7,14 +7,14 @@ import 'package:wine_cellar/ui/constants.dart';
 import '../base_model.dart';
 
 class StatisticsModel extends BaseModel {
-  final WineService _db;
+  final WineService _wineService;
   final Settings _settings;
   final PageController _controller = PageController(initialPage: 1);
   final List<Map<String, double>> stats = [];
   int _index = 1;
 
-  StatisticsModel({WineService db, Settings settings})
-      : _db = db,
+  StatisticsModel({WineService wineService, Settings settings})
+      : _wineService = wineService,
         _settings = settings;
 
   String get currency => _settings.currency;
@@ -26,22 +26,20 @@ class StatisticsModel extends BaseModel {
   int totalWines = 0;
   double cellarWorth = 0;
 
-
-
   Future loadAllStatistics() async {
     setBusy(true);
-    totalWines = await _db.getStatistics();
-    cellarWorth = await _db.getCellarWorth();
-    await loadPieData(wineCategories, 'type');
-    await loadPieData(wineSizes, 'size');
-    await loadPieData(countryNames, 'country');
+    totalWines = _wineService.getBottlesInCellar();
+    cellarWorth = _wineService.getCellarWorth();
+    loadPieData(wineCategories, 'type');
+    loadPieData(wineSizes, 'size');
+    loadPieData(countryNames, 'country');
     setBusy(false);
   }
 
-  Future loadPieData(List iniData, String dataType) async {
+  void loadPieData(List<String> iniData, String dataType) {
     Map wines = {};
     for (String item in iniData) {
-      int data = await _db.getStatistics(column: dataType, shouldEqual: item);
+      int data = amountOfBottlesPerCategory(dataType, item);
       if (data != 0) wines[item] = data;
     }
     if (dataType == "country" && wines.length > 6) {
@@ -53,6 +51,16 @@ class StatisticsModel extends BaseModel {
     } else {
       stats.add(wines.map((s, i) => MapEntry(s, (i / totalWines) * 100)));
     }
+  }
+
+  int amountOfBottlesPerCategory(String category, String item) {
+    int sum = 0;
+    _wineService.activeWines.forEach((wine) {
+      if (wine.toJson()[category] == item) {
+        sum++;
+      }
+    });
+    return sum;
   }
 
   void setIndex(int index) {

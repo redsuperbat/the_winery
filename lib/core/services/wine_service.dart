@@ -5,24 +5,18 @@ import 'package:flutter/foundation.dart';
 import 'package:wine_cellar/core/models/wine.dart';
 import 'package:http_parser/http_parser.dart';
 
-import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:wine_cellar/core/services/user_service.dart';
 
 class WineService {
-  // final DatabaseService _db;
-
   final UserService _userService;
   final StreamController<String> _subType = StreamController.broadcast();
   final StreamController<List<Wine>> _wines = StreamController.broadcast();
   final StreamController<Wine> _wine = StreamController.broadcast();
 
   static const String endpoint = 'http://rest1.dizzyhouse.com/api';
-
-  // static final Dio dio =
-  //     Dio(BaseOptions(baseUrl: 'http://rest1.dizzyhouse.com/api'));
 
   WineService({@required UserService userService}) : _userService = userService;
 
@@ -150,6 +144,7 @@ class WineService {
     final response = await http.get('$endpoint/wines',
         headers: {'Authorization': 'Bearer ${_userService.token}'});
     final decoded = json.decode(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       List<Wine> wines;
       if (decoded.length > 0) {
@@ -182,25 +177,18 @@ class WineService {
     print(response.body);
   }
 
-  Future<int> getStatistics({String column, String shouldEqual}) async {
+  int getBottlesInCellar() {
     int sum = 0;
     // TODO: Implement frontend calculations of this
-    // if (column != null && shouldEqual != null) {
-    //   final data = await _db.rawQuery(
-    //       "SELECT type, quantity FROM $cellar WHERE $column = '$shouldEqual'");
-    //   data.forEach((m) => sum = sum + m['quantity']);
-    // } else {
-    //   final data = await _db.rawQuery("SELECT type, quantity FROM $cellar");
-    //   data.forEach((m) => sum = sum + m['quantity']);
-    // }
+    activeWines.forEach((Wine wine) => sum += wine.quantity);
     return sum;
   }
 
-  Future<double> getCellarWorth() async {
+  double getCellarWorth() {
     double sum = 0;
     // TODO: get cellar worth
-    // final data = await _db.rawQuery("SELECT price, quantity FROM $cellar");
-    // data.forEach((m) => sum = sum + m['price'] * m['quantity']);
+    activeWines
+        .forEach((Wine wine) => sum += (wine?.price ?? 0 * wine.quantity));
     return sum;
   }
 }

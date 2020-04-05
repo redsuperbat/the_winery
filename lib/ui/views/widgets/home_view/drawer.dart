@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/models/profile.dart';
+// import 'package:wine_cellar/core/models/profile.dart';
 import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
 import '../../../constants.dart';
@@ -47,24 +47,24 @@ class MyDrawer extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                       otherAccountsPictures: <Widget>[
-                        for (var i = 1; i <= 2; i++)
-                          AlternativeCellar(
-                            profile: snapshot.hasData && length > i
-                                ? snapshot.data[i]
-                                : null,
-                            changeCellar: (profile) =>
-                                model.changeCellar(profile),
-                            addCellar: (name) => model.createCellar(name),
-                          ),
+                        // for (var i = 1; i <= 2; i++)
+                        //   AlternativeCellar(
+                        //     profile: snapshot.hasData && length > i
+                        //         ? snapshot.data[i]
+                        //         : null,
+                        //     changeCellar: (profile) =>
+                        //         model.changeCellar(profile),
+                        //     addCellar: (name) => model.createCellar(name),
+                        //   ),
                       ],
-                      currentAccountPicture: AlternativeCellar(
-                          profile: snapshot.hasData && length > 0
-                              ? snapshot.data[0]
-                              : null,
-                          addCellar: (name) => model.createCellar(name),
-                          style: TextStyle(
-                            fontSize: 35,
-                          )),
+                      // currentAccountPicture: AlternativeCellar(
+                      //     profile: snapshot.hasData && length > 0
+                      //         ? snapshot.data[0]
+                      //         : null,
+                      //     addCellar: (name) => model.createCellar(name),
+                      //     style: TextStyle(
+                      //       fontSize: 35,
+                      //     )),
                       accountName: Container(),
                       accountEmail: Container(
                         child: Text(
@@ -106,56 +106,56 @@ class MyDrawer extends StatelessWidget {
   }
 }
 
-class AlternativeCellar extends StatelessWidget {
-  final Profile profile;
-  final Function changeCellar;
-  final Function addCellar;
-  final TextStyle style;
+// class AlternativeCellar extends StatelessWidget {
+//   final Profile profile;
+//   final Function changeCellar;
+//   final Function addCellar;
+//   final TextStyle style;
 
-  AlternativeCellar(
-      {this.profile, this.changeCellar, this.addCellar, this.style});
+//   AlternativeCellar(
+//       {this.profile, this.changeCellar, this.addCellar, this.style});
 
-  @override
-  Widget build(BuildContext context) {
-    print(profile);
-    return profile == null
-        ? InkWell(
-            child: CircleAvatar(
-              backgroundColor: mainColor,
-              child: Container(
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            onTap: () => showDialog(
-              context: context,
-              builder: (_) => WelcomeDialog(
-                addCellar: addCellar,
-                title: Text(
-                  "Add a new cellar",
-                  style: titleStyle,
-                ),
-                content: Text(
-                  "This new cellar will contain no wines,"
-                  "\nto change back to your original cellar just press that cellar.",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          )
-        : InkWell(
-            onTap: () =>
-                changeCellar == null ? print("im null") : changeCellar(profile),
-            child: CircleAvatar(
-              foregroundColor: Colors.white,
-              backgroundColor: Color(profile.color),
-              child: Text(
-                profile.displayName.substring(0, 1).toUpperCase(),
-                style: style ?? TextStyle(),
-              ),
-            ),
-          );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     print(profile);
+//     return profile == null
+//         ? InkWell(
+//             child: CircleAvatar(
+//               backgroundColor: mainColor,
+//               child: Container(
+//                 child: Icon(
+//                   Icons.add,
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             ),
+//             onTap: () => showDialog(
+//               context: context,
+//               builder: (_) => WelcomeDialog(
+//                 addCellar: addCellar,
+//                 title: Text(
+//                   "Add a new cellar",
+//                   style: titleStyle,
+//                 ),
+//                 content: Text(
+//                   "This new cellar will contain no wines,"
+//                   "\nto change back to your original cellar just press that cellar.",
+//                   textAlign: TextAlign.center,
+//                 ),
+//               ),
+//             ),
+//           )
+//         : InkWell(
+//             onTap: () =>
+//                 changeCellar == null ? print("im null") : changeCellar(profile),
+//             child: CircleAvatar(
+//               foregroundColor: Colors.white,
+//               backgroundColor: Color(profile.color),
+//               child: Text(
+//                 profile.displayName.substring(0, 1).toUpperCase(),
+//                 style: style ?? TextStyle(),
+//               ),
+//             ),
+//           );
+//   }
+// }

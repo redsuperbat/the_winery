@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
-import 'package:wine_cellar/core/models/profile.dart';
-import 'package:wine_cellar/core/services/profile_service.dart';
+// import 'package:wine_cellar/core/models/profile.dart';
+// import 'package:wine_cellar/core/services/profile_service.dart';
 import 'package:wine_cellar/core/services/settings_service.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
@@ -46,12 +46,12 @@ class HomeModel extends BaseModel {
     // await loadProfiles();
   }
 
-  Future changeCellar(Profile profile) async {
-    // TODO: implement changing cellars
-    // await _profileService.setDefault(profile);
-    // _wineService.cellar = await _profileService.getDefaultCellar();
-    await _wineService.getAllWine();
-  }
+  // Future changeCellar(Profile profile) async {
+  //   // TODO: implement changing cellars
+  //   // await _profileService.setDefault(profile);
+  //   // _wineService.cellar = await _profileService.getDefaultCellar();
+  //   await _wineService.getAllWine();
+  // }
 
   Future<void> createProfile(String displayName, String cellarName) async {
     // await _profileService.addProfile(displayName, cellarName);

@@ -16,6 +16,9 @@ class AddWineFormModel extends BaseModel {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController grapeController = TextEditingController();
 
+  final StreamController<List<Wine>> suggestedWinesController =
+      StreamController();
+
   bool showSearch = true;
 
   AddWineFormModel({WineService wineService, Settings settings})
@@ -29,11 +32,9 @@ class AddWineFormModel extends BaseModel {
 
   String get currency => _settings.currency;
 
-  Stream<List<Wine>> get wines => _wineService.wines;
+  Stream<List<Wine>> get stream => suggestedWinesController.stream;
 
   String get text => nameController.text;
-
-  List<Wine> queryWines;
 
   Wine get wine => _wineService.wine;
 
@@ -43,6 +44,7 @@ class AddWineFormModel extends BaseModel {
     priceController.dispose();
     grapeController.dispose();
     districtController.dispose();
+    suggestedWinesController.close();
     print("Disposing AddWineFormModel");
     super.dispose();
   }
@@ -51,7 +53,8 @@ class AddWineFormModel extends BaseModel {
     showSearch = true;
   }
 
-  void setWine(Wine wine) {
+  void setWine(Map wineMap) {
+    Wine wine = Wine.fromJson(wineMap);
     _wineService.wine = wine;
     nameController.text = wine.name ?? "";
     priceController.text = wine.price == null ? "" : wine.price.toString();
@@ -63,8 +66,30 @@ class AddWineFormModel extends BaseModel {
   }
 
   void listener() {
-    // TODO: Implement search
-    // _wineService.searchWine(nameController.text);
+    List<Wine> searchWines = _wineService.cachedWines
+        .where((Wine wine) {
+          bool returner = false;
+          Map attrsToSearch = {
+            "name": wine.name,
+            "vintage": wine.vintage,
+            "district": wine.district,
+            "grapes": wine.grapes,
+            "type": wine.type,
+            "size": wine.size,
+            "country": wine.country
+          };
+          // set returner to true if the query matches any of the attributes we want to search.
+          attrsToSearch.forEach((key, value) => value
+                  .toString()
+                  .toLowerCase()
+                  .contains(nameController.text.toLowerCase())
+              ? returner = true
+              : null);
+          return returner;
+        })
+        .toSet()
+        .toList();
+    suggestedWinesController.sink.add(searchWines);
     setName();
   }
 

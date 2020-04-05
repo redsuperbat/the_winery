@@ -39,12 +39,12 @@ class Router {
         return MaterialPageRoute(builder: (_) => ImageView(url));
       case 'wine-edit':
         return MaterialPageRoute(builder: (_) => WineEditView());
-      case 'cellar-edit':
-        var profile = settings.arguments;
-        return MaterialPageRoute(
-            builder: (_) => CellarEditView(
-                  profile: profile,
-                ));
+      // case 'cellar-edit':
+      //   var profile = settings.arguments;
+      //   return MaterialPageRoute(
+      //       builder: (_) => CellarEditView(
+      //             profile: profile,
+      //           ));
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

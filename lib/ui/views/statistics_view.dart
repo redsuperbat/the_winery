@@ -11,38 +11,38 @@ class StatisticsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<StatisticsModel>(
       model: StatisticsModel(
-        db: Provider.of(context),
+        wineService: Provider.of(context),
         settings: Provider.of(context),
       ),
       onModelReady: (model) async => await model.loadAllStatistics(),
       builder: (context, model, child) => Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                "Statistics",
-                textAlign: TextAlign.center,
-              ),
-            ),
-            body: model.busy
-                ? Container()
-                : SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TopCard(model: model),
-                        PieChartPageView(model: model),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          child: Card(
-                            child: Center(
-                              child: Text("Ads here"),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "Statistics",
+            textAlign: TextAlign.center,
           ),
+        ),
+        body: model.busy
+            ? Container()
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TopCard(model: model),
+                    PieChartPageView(model: model),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Card(
+                        child: Center(
+                          child: Text("Ads here"),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+      ),
     );
   }
 }

@@ -40,7 +40,7 @@ class SettingsView extends StatelessWidget {
                   onChanged: (value) => model.setCurrency(value),
                 ),
               ),
-              Cellars(model: model),
+              // Cellars(model: model),
               ListTile(
                 onTap: () => showDialog(
                   context: context,

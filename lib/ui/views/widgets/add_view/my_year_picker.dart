@@ -2,12 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:wine_cellar/core/models/wine.dart';
+
 class MyYearPicker extends StatefulWidget {
   final int selectedYear;
   final int firstYear;
   final int lastYear;
   final ValueChanged<int> onChanged;
-  final Stream wineStream;
+  final Stream<Wine> wineStream;
 
   MyYearPicker(
       {@required this.selectedYear,
@@ -36,8 +38,8 @@ class _MyYearPickerState extends State<MyYearPicker> {
           (widget.selectedYear - widget.firstYear - 0.5) * _itemExtent,
     );
     selectedYear = widget.selectedYear;
-    _sub = widget.wineStream.listen((w) {
-      selectedYear = w.vintage;
+    _sub = widget.wineStream.listen((Wine w) {
+      selectedYear = int.parse(w.vintage);
       autoScroll();
     });
     super.initState();

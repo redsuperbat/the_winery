@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:wine_cellar/core/services/database_service.dart';
-import 'package:wine_cellar/core/services/profile_service.dart';
+// import 'package:wine_cellar/core/models/profile.dart';
+// import 'package:wine_cellar/core/services/database_service.dart';
+// import 'package:wine_cellar/core/services/profile_service.dart';
 import 'package:wine_cellar/core/services/settings_service.dart';
 
 import '../base_model.dart';
@@ -16,7 +17,7 @@ class SettingsModel extends BaseModel {
 
   String get currency => _settings.currency;
 
-  Stream<List> get profiles => StreamController().stream;
+  // Stream<List<Profile>> get profiles => StreamController().stream;
 
   Future<void> deleteDb() async {
     // TODO: Implement deleting all wines

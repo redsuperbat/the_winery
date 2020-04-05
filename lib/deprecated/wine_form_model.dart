@@ -1,10 +1,10 @@
 import 'package:wine_cellar/core/models/wine.dart';
 import 'package:wine_cellar/core/services/wine_service.dart';
 
-import '../base_model.dart';
+// import '../base_model.dart';
 import 'package:flutter/material.dart';
 
-class WineFormModel extends BaseModel {
+class WineFormModel {
   final WineService _wineService;
 
   TextEditingController districtController = TextEditingController();

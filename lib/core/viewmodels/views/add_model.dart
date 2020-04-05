@@ -28,7 +28,6 @@ class AddModel extends BaseModel {
     image = await ImagePicker.pickImage(
         source: ImageSource.camera, imageQuality: 15);
     _wineService.wineImageFilePath = image.path;
-    print(_wineService.wineImageFilePath);
     notifyListeners();
   }
 }
