@@ -20,19 +20,19 @@ List<SingleChildWidget> independentServices = [
   Provider.value(value: WineDb()),
   Provider.value(value: JsonService()),
   Provider.value(value: Settings()),
-  Provider.value(value: DatabaseService()),
+  // Provider.value(value: DatabaseService());
   Provider.value(value: UserService())
 ];
 
 List<SingleChildWidget> dependentServices = [
-  ProxyProvider<DatabaseService, WineService>(
-    //The initial builder can instantiate some value for you if you want
-    //initialBuilder: (wineService) => wineService.instantiateSomeValue(),
-    update: (context, db, wineService) => WineService(database: db),
-  ),
-  ProxyProvider<DatabaseService, ProfileService>(
-    update: (context, db, profileService) => ProfileService(db: db),
-  ),
+  ProxyProvider<UserService, WineService>(
+      //The initial builder can instantiate some value for you if you want
+      //initialBuilder: (wineService) => wineService.instantiateSomeValue(),
+      update: (context, userService, wineService) =>
+          WineService(userService: userService))
+  // ProxyProvider<DatabaseService, ProfileService>(
+  //   update: (context, db, profileService) => ProfileService(db: db),
+  // ),
 ];
 
 List<SingleChildWidget> uiConsumableProviders = [

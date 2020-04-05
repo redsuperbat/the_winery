@@ -1,17 +1,29 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:wine_cellar/core/models/wine.dart';
+import 'package:http_parser/http_parser.dart';
 
-import 'database_service.dart';
+import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:wine_cellar/core/services/user_service.dart';
 
 class WineService {
-  final DatabaseService _db;
+  // final DatabaseService _db;
+  final UserService _userService;
   final StreamController<String> _subType = StreamController.broadcast();
   final StreamController<List<Wine>> _wines = StreamController.broadcast();
   final StreamController<Wine> _wine = StreamController.broadcast();
 
-  WineService({@required DatabaseService database}) : _db = database;
+  static const String endpoint = 'http://rest1.dizzyhouse.com/api';
+
+  static final Dio dio =
+      Dio(BaseOptions(baseUrl: 'http://rest1.dizzyhouse.com/api'));
+
+  WineService({@required UserService userService}) : _userService = userService;
 
   Stream<Wine> get wineStream => _wine.stream;
 
@@ -22,6 +34,10 @@ class WineService {
   Stream get subType => _subType.stream;
 
   Stream<List<Wine>> get wines => _wines.stream;
+
+  List<Wine> cachedWines;
+
+  String wineImageFilePath;
 
   Wine wine = Wine();
 
@@ -47,9 +63,10 @@ class WineService {
   }
 
   Future<void> searchWine(String query) async {
+    // TODO: IMPLEMENT search wines
     final List<Wine> wines = [];
-    final response = await _db.search(cellar, 'name', query);
-    response.forEach((w) => wines.add(Wine.fromJson(w)));
+    // final response = await _db.search(cellar, 'name', query);
+    // response.forEach((w) => wines.add(Wine.fromJson(w)));
     _wines.add(wines);
   }
 
@@ -64,8 +81,9 @@ class WineService {
   }
 
   Future addCellar(String name) async {
+    // TODO: Implement adding cellars
     cellar = name;
-    await _db.createTable(name);
+    // await _db.createTable(name);
     await getAllWine();
   }
 
@@ -77,13 +95,29 @@ class WineService {
     _wines.add(wines);
   }
 
-  Future<void> insertWine() async {
-    // TODO: Send wine to db
-    // wine.id = await _db.getId(cellar);
-    // wine.time = DateTime.now().toString();
-    print('wine image path is: ${wine.image}');
-    await _db.insert(cellar, wine.toJson());
-    await getAllWine();
+  Future<void> addWine() async {
+    var request = http.MultipartRequest("POST", Uri.parse('$endpoint/wines'));
+    request.files.add(await http.MultipartFile.fromPath(
+        "image", wineImageFilePath,
+        contentType: MediaType('image', 'jpg')));
+    request.headers.addAll({"Authorization": 'Bearer ${_userService.token}'});
+    final Map filteredMap = wine.toJson()
+      ..removeWhere((key, value) => value == null);
+    final Map<String, String> map =
+        filteredMap.map((key, value) => MapEntry(key, value.toString()));
+    request.fields.addAll(map);
+    Wine fetchedWine;
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      response.stream
+          .transform(utf8.decoder)
+          .listen((res) => fetchedWine = Wine.fromJson(json.decode(res)));
+      cachedWines.add(fetchedWine);
+      _wines.add(cachedWines);
+    } else {
+      print(response.statusCode);
+      response.stream.transform(utf8.decoder).listen((res) => print(res));
+    }
   }
 
   Future<List<Map<String, dynamic>>> getExportData() async {
@@ -93,16 +127,27 @@ class WineService {
   }
 
   Future<void> getAllWine() async {
-    // TODO: Get wines from api
-
-    final List<Wine> wines = [];
-    // TODO: Implement json parsing
-    // request.forEach((w) => wines.add(Wine.fromJson(w)));
-    _wines.add(wines);
+    final response = await dio.get('/wines',
+        options: Options(
+            headers: {'Authorization': 'Bearer ${_userService.token}'}));
+    if (response.statusCode == 200) {
+      List<Wine> wines;
+      if (response.data.length > 0) {
+        wines = response.data.map<Wine>((wine) => Wine.fromJson(wine)).toList();
+      } else {
+        wines = [];
+      }
+      cachedWines = wines;
+      _wines.add(cachedWines);
+    } else {
+      // If token fails, get new token and try again..
+      _userService.initUser().then((value) => getAllWine());
+    }
   }
 
   Future<void> updateWine({Wine newWine}) async {
-    await _db.update(cellar, newWine?.toJson() ?? wine.toJson());
+    // TODO: Implement updating wine
+    // await _db.update(cellar, newWine?.toJson() ?? wine.toJson());
   }
 
   Future<int> getStatistics({String column, String shouldEqual}) async {

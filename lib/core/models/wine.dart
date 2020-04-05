@@ -8,7 +8,7 @@ class Wine {
   String id;
   int quantity;
   String grapes;
-  String image;
+  String imageUrl;
   double rating;
   String comment;
   double price;
@@ -24,11 +24,11 @@ class Wine {
       this.grapes,
       this.quantity = 1,
       this.size,
-      this.image,
+      this.imageUrl,
       this.date,
       this.comment,
-      this.price = 0.0,
-      this.rating = 0.0});
+      this.price,
+      this.rating});
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         'name': name,
@@ -43,7 +43,7 @@ class Wine {
         'rating': rating,
         'comment': comment,
         'price': price,
-        'image': image,
+        'imageUrl': imageUrl,
       };
 
   Wine.fromJson(Map<String, dynamic> json) {
@@ -54,7 +54,7 @@ class Wine {
     grapes = json['grapes'];
     quantity = json['quantity'];
     size = json['size'];
-    image = json['image'];
+    imageUrl = json['imageUrl'];
     date = json['date'];
     rating = json['rating']?.toDouble();
     comment = json['comment'];

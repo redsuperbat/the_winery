@@ -13,10 +13,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<HomeModel>(
       model: HomeModel(
-        wineService: Provider.of(context),
-        settings: Provider.of(context),
-        profileService: Provider.of(context),
-      ),
+          wineService: Provider.of(context), settings: Provider.of(context)),
       onModelReady: (model) async {
         await model.iniAppData();
         // if (!model.hasCreated)

@@ -11,14 +11,12 @@ import '../base_model.dart';
 
 class ExportModel extends BaseModel {
   final WineService _db;
-  final Api _api;
+  // final Api _api;
   final TextEditingController controller = TextEditingController();
   bool export = false;
   final RegExp regExp = RegExp(r"^[a-zA-Z0-9_\s-]+$");
 
-  ExportModel({WineService db, Api api})
-      : _db = db,
-        _api = api;
+  ExportModel({WineService db}) : _db = db;
 
   List<Map<String, dynamic>> wines;
 

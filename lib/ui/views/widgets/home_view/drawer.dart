@@ -36,7 +36,7 @@ class MyDrawer extends StatelessWidget {
                   model.counter = 0;
                 }
               },
-              child: StreamBuilder<List>(
+              child: StreamBuilder(
                   stream: model.profiles,
                   builder: (context, snapshot) {
                     final int length =

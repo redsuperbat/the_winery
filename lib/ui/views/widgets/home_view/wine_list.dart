@@ -10,6 +10,7 @@ class WineList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseWidget<WineListModel>(
       model: WineListModel(wineService: Provider.of(context)),
+      onModelReady: (model) => model.getWines(),
       builder: (context, model, child) => StreamBuilder(
         stream: model.wines,
         builder: (context, AsyncSnapshot<List> snapshot) => snapshot.hasData
@@ -30,8 +31,10 @@ class WineList extends StatelessWidget {
                   ),
                 ),
               )
-            : Center(
-                child: CircularProgressIndicator(),
+            : Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
       ),
     );

@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 class ImageView extends StatefulWidget {
-  final String path;
+  final String url;
 
-  const ImageView(this.path);
+  const ImageView(this.url);
 
   @override
   _ImageViewState createState() => _ImageViewState();
 }
 
 class _ImageViewState extends State<ImageView> {
-  File image;
   double _zoom;
   double _previousZoom;
   Offset _scrollOffset;
@@ -21,7 +20,6 @@ class _ImageViewState extends State<ImageView> {
 
   @override
   void initState() {
-    image = File(widget.path);
     _zoom = 1.0;
     _previousZoom = null;
     _scrollOffset = Offset.zero;
@@ -35,23 +33,22 @@ class _ImageViewState extends State<ImageView> {
       tag: "image",
       child: Scaffold(
         backgroundColor: Colors.black,
-        body:  GestureDetector(
-            onScaleStart: _handleScaleStart,
-            onScaleUpdate: _handleScaleUpdate,
-            onScaleEnd: _handleScaleEnd,
-            onDoubleTap: _handleDoubleTap,
-            child: Center(
-              child: Transform(
-                transform:
-                    Matrix4.diagonal3(vector.Vector3(_zoom, _zoom, _zoom))
-                      ..translate(_scrollOffset.dx, _scrollOffset.dy),
-                alignment: AlignmentDirectional.center,
-                child: Image.file(
-                  image,
-                  fit: BoxFit.fitWidth,
-                ),
+        body: GestureDetector(
+          onScaleStart: _handleScaleStart,
+          onScaleUpdate: _handleScaleUpdate,
+          onScaleEnd: _handleScaleEnd,
+          onDoubleTap: _handleDoubleTap,
+          child: Center(
+            child: Transform(
+              transform: Matrix4.diagonal3(vector.Vector3(_zoom, _zoom, _zoom))
+                ..translate(_scrollOffset.dx, _scrollOffset.dy),
+              alignment: AlignmentDirectional.center,
+              child: Image.network(
+                widget.url,
+                fit: BoxFit.fitWidth,
               ),
             ),
+          ),
         ),
       ),
     );
@@ -79,10 +76,10 @@ class _ImageViewState extends State<ImageView> {
   }
 
   void _handleScaleUpdate(ScaleUpdateDetails update) {
-    Offset _position = _previousScrollOffset-update.focalPoint;
+    Offset _position = _previousScrollOffset - update.focalPoint;
     _previousScrollOffset = update.focalPoint;
     setState(() {
-      if(_zoom >1 && _position.distance < 20){
+      if (_zoom > 1 && _position.distance < 20) {
         _scrollOffset -= _position;
       }
       _zoom = _previousZoom * update.scale;

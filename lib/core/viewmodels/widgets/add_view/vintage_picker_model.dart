@@ -40,8 +40,12 @@ class VintagePickerModel extends BaseModel {
   }
 
   void change() {
-    isChecked ? wine.vintage = "NV" : wine.vintage = "";
     isChecked = !isChecked;
+    if (isChecked) {
+      wine.vintage = "NV";
+    } else {
+      // Do nothing
+    }
     notifyListeners();
   }
 

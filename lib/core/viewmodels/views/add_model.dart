@@ -13,18 +13,19 @@ class AddModel extends BaseModel {
 
   @override
   void dispose() {
-   _wineService.resetWine();
+    _wineService.resetWine();
     super.dispose();
   }
 
-  Future<void> addWineToDb() async {
-    await _wineService.insertWine();
+  Future<void> addWine() async {
+    await _wineService.addWine();
   }
 
   Future<void> getImage() async {
-    image = await ImagePicker.pickImage(source: ImageSource.camera);
-    _wineService.wine.image = image.path;
-    print(_wineService.wine.image);
+    image = await ImagePicker.pickImage(
+        source: ImageSource.camera, imageQuality: 30);
+    _wineService.wineImageFilePath = image.path;
+    print(_wineService.wineImageFilePath);
     notifyListeners();
   }
 }

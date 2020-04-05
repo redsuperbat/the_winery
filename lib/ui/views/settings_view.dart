@@ -9,10 +9,7 @@ class SettingsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<SettingsModel>(
-      model: SettingsModel(
-          settings: Provider.of(context),
-          db: Provider.of(context),
-          profile: Provider.of(context)),
+      model: SettingsModel(settings: Provider.of(context)),
       //  onModelReady: (model) => model.loadProfiles(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(

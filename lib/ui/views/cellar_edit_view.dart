@@ -14,7 +14,7 @@ class CellarEditView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<CellarEditModel>(
-      model: CellarEditModel(profileService: Provider.of(context)),
+      model: CellarEditModel(),
       onModelReady: (model) => model.setProfile(profile),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(),

@@ -15,6 +15,7 @@ class WineModel extends BaseModel {
   String get currency => _settings.currency;
   final TextEditingController cmtController = TextEditingController();
   File image;
+  String get wineImageFilePath => _wineService.wineImageFilePath;
 
   WineModel({@required WineService wineService, @required Settings settings})
       : _wineService = wineService,
@@ -39,8 +40,8 @@ class WineModel extends BaseModel {
   Future<void> getImage(Wine wine) async {
     image = await ImagePicker.pickImage(source: ImageSource.camera);
     if (image != null) {
-      wine.image = image.path;
-      print(wine.image);
+      _wineService.wineImageFilePath = image.path;
+      print(wineImageFilePath);
       await updateWine(wine);
       notifyListeners();
     }

@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings {
   String currency = "SEK";
-  bool hasCreated = false;
   SharedPreferences _prefs;
 
   Future<void> iniSettings() async {
@@ -12,17 +11,11 @@ class Settings {
       print("Initializing settings");
       _prefs = await SharedPreferences.getInstance();
       currency = _prefs.getString('currency') ?? "SEK";
-      hasCreated = _prefs.getBool('hasCreated') ?? false;
-      print("User has not been created");
     }
   }
 
   void setCurrency(String currency) {
     _prefs.setString('currency', currency);
-  }
-
-  void setHasCreated(bool bool) {
-    _prefs.setBool('hasCreated', bool);
   }
 
   Future<void> clearPrefs() async {

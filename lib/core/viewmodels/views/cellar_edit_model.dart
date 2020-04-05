@@ -6,14 +6,14 @@ import '../base_model.dart';
 
 class CellarEditModel extends BaseModel {
   Profile _profile;
-  ProfileService _profileService;
+  // ProfileService _profileService;
 
   Profile get profile => _profile;
 
   TextEditingController controller;
 
-  CellarEditModel({ProfileService profileService})
-      : _profileService = profileService;
+  // CellarEditModel({ProfileService profileService})
+  //     : _profileService = profileService;
 
   void setProfile(Profile profile) {
     _profile = profile;
@@ -27,7 +27,7 @@ class CellarEditModel extends BaseModel {
   }
 
   bool changeProfile() {
-    _profileService.updateProfile(_profile);
+    // _profileService.updateProfile(_profile);
     return true;
   }
 

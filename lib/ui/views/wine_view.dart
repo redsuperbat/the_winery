@@ -45,7 +45,7 @@ class WineView extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.all(25),
                           child: WineImage(
-                            path: wine.image,
+                            url: wine.imageUrl,
                             width: MediaQuery.of(context).size.width * 0.4,
                             height: MediaQuery.of(context).size.height * 0.245,
                           ),

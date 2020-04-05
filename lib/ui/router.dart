@@ -35,8 +35,8 @@ class Router {
       case 'statistics':
         return MaterialPageRoute(builder: (_) => StatisticsView());
       case 'image':
-        String path = settings.arguments;
-        return MaterialPageRoute(builder: (_) => ImageView(path));
+        String url = settings.arguments;
+        return MaterialPageRoute(builder: (_) => ImageView(url));
       case 'wine-edit':
         return MaterialPageRoute(builder: (_) => WineEditView());
       case 'cellar-edit':

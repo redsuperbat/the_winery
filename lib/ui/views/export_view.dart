@@ -10,7 +10,7 @@ class ExportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<ExportModel>(
-      model: ExportModel(db: Provider.of(context), api: Provider.of(context)),
+      model: ExportModel(db: Provider.of(context)),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           title: Text("Importing/Exporting CSV"),

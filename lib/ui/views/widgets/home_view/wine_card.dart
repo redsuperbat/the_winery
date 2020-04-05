@@ -139,7 +139,7 @@ class WineCard extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: Text(wine.date),
+                      child: Text(wine.date.substring(0, 10)),
                     )
                   ],
                 ),
