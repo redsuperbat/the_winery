@@ -10,10 +10,10 @@ class ExportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<ExportModel>(
-      model: ExportModel(db: Provider.of(context)),
+      model: ExportModel(userService: Provider.of(context)),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text("Importing/Exporting CSV"),
+          title: Text("Exporting your cellar"),
         ),
         body: SingleChildScrollView(
           physics: ScrollPhysics(),
@@ -24,7 +24,8 @@ class ExportView extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.all(20),
                   child: Text(
-                    "This is where you can export and import CSV files to your database.\n"
+                    "This is where you can export your wines into CSV files.\n"
+                    "The file is automatically sent to your email-address. "
                     "The CSV file can be opened by any program such as Microsoft Excel or Google "
                     "sheets for further processing of the data",
                     textAlign: TextAlign.center,
@@ -50,8 +51,8 @@ class ExportView extends StatelessWidget {
                         Builder(
                           builder: (context) => RaisedButton(
                             onPressed: () async {
-                              // bool success = await model.exportToCsv();
-                              if (!true)
+                              bool success = await model.exportWines();
+                              if (!success)
                                 showDialog(
                                   barrierDismissible: false,
                                   context: context,
@@ -61,10 +62,10 @@ class ExportView extends StatelessWidget {
                                 Scaffold.of(context).showSnackBar(
                                   SnackBar(
                                     action: SnackBarAction(
-                                        label: 'Undo',
+                                        label: 'Open gmail',
                                         onPressed: () => print("hello")),
                                     content: Text(
-                                        "Created file: ${model.controller.text}.csv"),
+                                        "Created file: ${model.controller.text}.csv and sent to ${model.email}"),
                                   ),
                                 );
                                 model.startExport();
@@ -89,14 +90,6 @@ class ExportView extends StatelessWidget {
                           ),
                           color: confirmColor,
                         ),
-                        /*RaisedButton(
-                              onPressed: () => model.postWine(),
-                              child: Text("Send to Api"),
-                            ),
-                            RaisedButton(
-                              onPressed: () => model.getCellar(),
-                              child: Text("Import from api"),
-                            )*/
                       ],
                     ),
             ],

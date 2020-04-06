@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:wine_cellar/core/models/wine.dart';
@@ -156,9 +156,8 @@ class WineService {
       // Checking if wine is archived or not, shows only archived wines.
       sinkActiveWines();
     } else {
-      // If token fails, wait 2 seconds get new token and try again..
-      Timer.periodic(Duration(seconds: 2),
-          (t) => _userService.initUser().then((value) => getAllWine()));
+      // If token fails, wait 2 seconds and try again..
+      Future.delayed(Duration(seconds: 2), () => getAllWine());
     }
   }
 
@@ -175,20 +174,5 @@ class WineService {
     // sink wines that are not archived.
     sinkActiveWines();
     print(response.body);
-  }
-
-  int getBottlesInCellar() {
-    int sum = 0;
-    // TODO: Implement frontend calculations of this
-    activeWines.forEach((Wine wine) => sum += wine.quantity);
-    return sum;
-  }
-
-  double getCellarWorth() {
-    double sum = 0;
-    // TODO: get cellar worth
-    activeWines
-        .forEach((Wine wine) => sum += (wine?.price ?? 0 * wine.quantity));
-    return sum;
   }
 }

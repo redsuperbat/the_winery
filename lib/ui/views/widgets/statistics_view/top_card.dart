@@ -50,7 +50,7 @@ class TopCard extends StatelessWidget {
                           'assets/wines/wine_bottle_icon.png',
                           width: MediaQuery.of(context).size.width * 0.07,
                         ),
-                        middle: model.totalWines,
+                        middle: model.getBottlesInCellar(),
                         bottom: "Bottles in\ncellar",
                       ),
                       TopCardCircles(
@@ -59,7 +59,7 @@ class TopCard extends StatelessWidget {
                           color: Colors.white,
                           size: MediaQuery.of(context).size.width * 0.07,
                         ),
-                        middle: model.cellarWorth.toInt(),
+                        middle: model.getCellarWorth().toInt(),
                         bottom: "Cellar net\nworth",
                         extra: model.currency,
                       ),
@@ -116,7 +116,7 @@ class TopCardCircles extends StatelessWidget {
           height: size,
           decoration: BoxDecoration(
             border: Border.all(width: 2, color: Colors.white),
-         /*   gradient: LinearGradient(
+            /*   gradient: LinearGradient(
               colors: [accentColor, mainColor],
               stops: [0.1,0.8],
               begin: Alignment.topCenter,

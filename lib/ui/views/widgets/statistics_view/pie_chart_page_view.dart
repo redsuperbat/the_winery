@@ -23,38 +23,27 @@ class PieChartPageView extends StatelessWidget {
               onPageChanged: (index) => model.setIndex(index),
               controller: model.controller,
               children: <Widget>[
-                CustomPieChart(
-                    title: "Bottle sizes",
-                    dataMap: model.stats[1],
-                    numberOfWines: model.totalWines,
-                    busy: model.busy),
-                CustomPieChart(
-                  title: "Categories",
-                  busy: model.busy,
-                  dataMap: model.stats[0],
-                  numberOfWines: model.totalWines,
-                ),
-                CustomPieChart(
-                    title: "Countries",
-                    dataMap: model.stats[2],
-                    numberOfWines: model.totalWines,
-                    busy: model.busy)
+                for (var i = 0; i < model.piechartData.length; i++)
+                  CustomPieChart(
+                    title: model.pieNames[i],
+                    dataMap: model.piechartData[i],
+                    numberOfWines: model.getBottlesInCellar(),
+                  ),
               ],
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height*0.05,
+            height: MediaQuery.of(context).size.height * 0.05,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.white, accentColor],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter
-              ),
+                  colors: [Colors.white, accentColor],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                for (var i = 0; i < model.stats.length; i++)
+                for (var i = 0; i < 3; i++)
                   Dot(
                     dimensions: model.index == i ? 13 : 10,
                     color: model.index == i ? Colors.red : null,

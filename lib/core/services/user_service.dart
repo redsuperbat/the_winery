@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:wine_cellar/core/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:dio/dio.dart';
+// import 'package:dio/dio.dart';
 
 class UserService {
   // static final Dio dio =
@@ -13,6 +15,8 @@ class UserService {
   SharedPreferences _prefs;
 
   User get user => _user;
+  String get email => _user.email;
+  set email(String email) => _user.email = email;
   String get token => _user.token;
 
   Future<void> initUser() async {
@@ -24,14 +28,24 @@ class UserService {
         _user = User(
             email: _prefs.getString('email'), token: _prefs.getString('token'));
       } else {
-        String email = _prefs.getString('email');
-        print("trying to log in user..");
-        Map<String, dynamic> response =
-            await login(email, _prefs.getString("password"));
-        _user = User.fromJson(response);
-        _prefs.setString('token', _user.token);
+        await loginAndSetToken();
       }
     }
+  }
+
+  void updateToken() {
+    new Timer.periodic(Duration(minutes: 45), (Timer t) {
+      loginAndSetToken();
+    });
+  }
+
+  Future<void> loginAndSetToken() async {
+    String email = _prefs.getString('email');
+    print("trying to log in user..");
+    Map<String, dynamic> response =
+        await login(email, _prefs.getString("password"));
+    _user = User.fromJson(response);
+    _prefs.setString('token', _user.token);
   }
 
   bool isLoggedIn() {
@@ -82,5 +96,19 @@ class UserService {
     }).catchError((err) => result = json.decode(err));
 
     return result;
+  }
+
+  Future<bool> editUser(Map updateOps) async {
+    final response = await http.patch('$endpoint/users',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token'
+        },
+        body: updateOps);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

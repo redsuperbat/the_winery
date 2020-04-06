@@ -59,22 +59,6 @@ const List<String> wineCategories = [
   'Sweet'
 ];
 
-const List<String> csvTitle = [
-  "Name and Wine Producer",
-  "Type of wine",
-  "Appelation of origin",
-  "Cuntry of origin",
-  "Vintage",
-  "Grapes",
-  "Number of bottles quantity",
-  "Size of bottles",
-  "Path to image",
-  "DateTime of aquiring",
-  "Comments about the wine",
-  "Bought-price",
-  "Rating"
-];
-
 const List<String> currencies = [
   "EUR",
   "BGN",

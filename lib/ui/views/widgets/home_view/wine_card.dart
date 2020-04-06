@@ -93,7 +93,7 @@ class WineCard extends StatelessWidget {
                                           wine.type == "Champagne"
                                       ? 'assets/wines/sparkling_wine.png'
                                       : 'assets/wines/white_wine.png',
-                          height: 100,
+                          height: 75,
                           fit: BoxFit.contain,
                         ),
                 ),
@@ -119,29 +119,29 @@ class WineCard extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        wine.vintage,
-                        style: TextStyle(fontStyle: FontStyle.italic),
+                Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          wine.vintage,
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
                       ),
-                    ),
-                    Container(
-                      height: 15,
-                      child: Text(wine.size ?? ""),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: Text(
-                        '${wine.quantity} st',
-                        style: TextStyle(fontSize: 20, color: Colors.red),
+                      Container(
+                        height: 15,
+                        child: Text(wine.size ?? ""),
                       ),
-                    ),
-                    Container(
-                      child: Text(wine.date.substring(0, 10)),
-                    )
-                  ],
+                      Container(
+                        margin: EdgeInsets.all(5),
+                        child: Text(
+                          '${wine.quantity} st',
+                          style: TextStyle(fontSize: 20, color: Colors.red),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

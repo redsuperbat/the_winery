@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:wine_cellar/ui/views/startup_view.dart';
 
 import 'views/add_view.dart';
-import 'views/cellar_edit_view.dart';
+// import 'views/cellar_edit_view.dart';
 import 'views/export_view.dart';
 import 'views/home_view.dart';
 import 'views/image_view.dart';

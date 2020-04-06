@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
 
 import '../../../constants.dart';
-import 'welcome_dialog.dart';
+// import 'welcome_dialog.dart';
 
 class MyDrawer extends StatelessWidget {
   final HomeModel model;
@@ -78,7 +78,7 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             isThreeLine: true,
-            title: Text("Export/Import"),
+            title: Text("Export"),
             subtitle: Text("Export your data so you can view it in Excel"),
             trailing: Icon(Icons.import_export),
             onTap: () => Navigator.pushNamed(context, 'export'),

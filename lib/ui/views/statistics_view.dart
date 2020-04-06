@@ -10,11 +10,11 @@ class StatisticsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<StatisticsModel>(
+      onModelReady: (model) => model.initPieData(),
       model: StatisticsModel(
         wineService: Provider.of(context),
         settings: Provider.of(context),
       ),
-      onModelReady: (model) async => await model.loadAllStatistics(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
           centerTitle: true,

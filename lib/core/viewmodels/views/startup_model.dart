@@ -21,6 +21,7 @@ class StartupModel extends BaseModel {
     } else {
       sink.add("register");
     }
+    _userService.updateToken();
   }
 
   @override
@@ -28,11 +29,5 @@ class StartupModel extends BaseModel {
     print("disposing startup model");
     _starterView.close();
     super.dispose();
-  }
-
-  Future<void> test() async {
-    setBusy(true);
-    print(await _userService.login("admin@admn.com", "password"));
-    setBusy(false);
   }
 }

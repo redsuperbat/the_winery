@@ -4,23 +4,21 @@ import 'package:pie_chart/pie_chart.dart';
 class CustomPieChart extends StatelessWidget {
   final Map<String, double> dataMap;
   final int numberOfWines;
-  final bool busy;
   final String title;
 
   CustomPieChart(
       {@required this.dataMap,
       @required this.title,
-      @required this.numberOfWines,
-      @required this.busy});
+      @required this.numberOfWines});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      child: busy || numberOfWines == 0 || dataMap.isEmpty
+      child: numberOfWines == 0 || dataMap.isEmpty
           ? Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height*0.3,
+              height: MediaQuery.of(context).size.height * 0.3,
               child: Center(child: Text("No data to display :(")),
             )
           : Column(

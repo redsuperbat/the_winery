@@ -39,7 +39,8 @@ class _MyYearPickerState extends State<MyYearPicker> {
     );
     selectedYear = widget.selectedYear;
     _sub = widget.wineStream.listen((Wine w) {
-      selectedYear = int.parse(w.vintage);
+      selectedYear =
+          w.vintage == "NV" ? DateTime.now().year : int.parse(w.vintage);
       autoScroll();
     });
     super.initState();

@@ -9,7 +9,8 @@ class ExportDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Filename cannot be ${model.text}"),
+      title: Text(
+          "Export did not succeed due to a server error! \n Please try again."),
       content: RaisedButton(
         color: Colors.blue,
         onPressed: () {

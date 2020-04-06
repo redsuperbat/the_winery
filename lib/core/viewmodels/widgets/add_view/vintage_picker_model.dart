@@ -29,7 +29,7 @@ class VintagePickerModel extends BaseModel {
   }
 
   void setVintageFromStream(Wine _wine) {
-    if (_wine.vintage == null) {
+    if (_wine.vintage == "NV") {
       wine.vintage = "NV";
       isChecked = true;
       notifyListeners();

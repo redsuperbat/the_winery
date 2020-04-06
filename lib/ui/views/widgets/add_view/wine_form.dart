@@ -21,15 +21,18 @@ class AddWineForm extends StatelessWidget {
               children: <Widget>[
                 TextField(
                   focusNode: model.focusNode,
+                  autofocus: false,
                   onTap: () => model.showWineSearch(),
                   controller: model.nameController,
                   decoration: InputDecoration(hintText: 'Name & Producer'),
                 ),
                 TextField(
+                  autofocus: false,
                   controller: model.grapeController,
                   decoration: InputDecoration(hintText: 'Grapes'),
                 ),
                 TextField(
+                  autofocus: false,
                   controller: model.districtController,
                   decoration: InputDecoration(
                     suffixIcon: Tooltip(
@@ -44,6 +47,7 @@ class AddWineForm extends StatelessWidget {
                   ),
                 ),
                 TextField(
+                  autofocus: false,
                   keyboardType: TextInputType.number,
                   controller: model.priceController,
                   inputFormatters: <TextInputFormatter>[
