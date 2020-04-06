@@ -62,10 +62,11 @@ class ExportView extends StatelessWidget {
                                 Scaffold.of(context).showSnackBar(
                                   SnackBar(
                                     action: SnackBarAction(
-                                        label: 'Open gmail',
-                                        onPressed: () => print("hello")),
+                                      label: 'Open gmail',
+                                      onPressed: () => model.openGmail(),
+                                    ),
                                     content: Text(
-                                        "Created file: ${model.controller.text}.csv and sent to ${model.email}"),
+                                        "Created file: ${model.controller.text.replaceAll(model.filenameRegExp, '')}.csv and sent to ${model.email}"),
                                   ),
                                 );
                                 model.startExport();

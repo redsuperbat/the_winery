@@ -106,6 +106,7 @@ class UserService {
         },
         body: updateOps);
     if (response.statusCode == 200) {
+      _prefs.setString('email', updateOps['email']);
       return true;
     } else {
       return false;
