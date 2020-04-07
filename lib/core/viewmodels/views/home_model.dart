@@ -51,6 +51,6 @@ class HomeModel extends BaseModel {
     print(displayName);
     final cellarName = displayName.replaceAll(RegExp(r"[^\S\W]"), "");
     print(cellarName);
-    await _wineService.addCellar(cellarName);
+    // await _wineService.addCellar(cellarName);
   }
 }

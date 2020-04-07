@@ -39,24 +39,26 @@ class UserEdit extends StatelessWidget {
                         Spacer(),
                         model.busy
                             ? CircularProgressIndicator()
-                            : Column(
-                                children: <Widget>[
-                                  IconButton(
-                                      icon: Icon(
-                                        Icons.check_circle,
-                                        color: model.edited
-                                            ? Colors.green
-                                            : Colors.grey,
-                                      ),
-                                      onPressed: () => {model.editEmail()}),
-                                  model.edited
-                                      ? Text(
-                                          "Confirm",
-                                          style: TextStyle(fontSize: 9),
-                                        )
-                                      : Container()
-                                ],
-                              ),
+                            : model.isExpanded
+                                ? Column(
+                                    children: <Widget>[
+                                      IconButton(
+                                          icon: Icon(
+                                            Icons.check_circle,
+                                            color: model.edited
+                                                ? Colors.green
+                                                : Colors.grey,
+                                          ),
+                                          onPressed: () => {model.editEmail()}),
+                                      model.edited
+                                          ? Text(
+                                              "Confirm",
+                                              style: TextStyle(fontSize: 9),
+                                            )
+                                          : Container()
+                                    ],
+                                  )
+                                : Container(),
                       ],
                     )
                   : Container(),

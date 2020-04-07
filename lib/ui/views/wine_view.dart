@@ -41,9 +41,10 @@ class WineView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       InkWell(
-                        onTap: () => model.getImage(wine),
+                        onTap: () => {},
                         child: Container(
-                          padding: EdgeInsets.all(25),
+                          padding: EdgeInsets.only(
+                              left: 18, right: 18, bottom: 18, top: 12.5),
                           child: WineImage(
                             url: wine.imageUrl,
                             width: MediaQuery.of(context).size.width * 0.4,
@@ -75,15 +76,15 @@ class WineView extends StatelessWidget {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.43,
-                    child: Card(
-                      margin: EdgeInsets.only(top: 25),
+                    child: Container(
+                      margin: EdgeInsets.only(top: 12.5),
                       child: Padding(
                         padding: EdgeInsets.all(10),
                         child: Column(
                           children: <Widget>[
                             if (wine.country != null && wine.district != null)
                               WineInfo(
-                                  title: 'Country & Appelation',
+                                  title: 'Origin',
                                   text:
                                       '${wine.country ?? ""} ${wine.district ?? ""}'),
                             if (wine.vintage != null)
@@ -118,13 +119,16 @@ class WineView extends StatelessWidget {
               Card(
                 margin: EdgeInsets.only(right: 25, left: 25, bottom: 10),
                 elevation: 3,
-                child: TextField(
-                  controller: model.cmtController,
-                  onChanged: (value) => model.setComments(value, wine),
-                  decoration: InputDecoration.collapsed(
-                    hintText: "Write your notes about the wine here",
+                child: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: TextField(
+                    controller: model.cmtController,
+                    onChanged: (value) => model.setComments(value, wine),
+                    decoration: InputDecoration.collapsed(
+                      hintText: "Write your notes about the wine here",
+                    ),
+                    maxLines: 10,
                   ),
-                  maxLines: 10,
                 ),
               ),
               Text(
@@ -156,11 +160,11 @@ class WineInfo extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: subTitleStyle,
+            style: subTitleStyle2,
           ),
           Text(
             text ?? "",
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 15),
           ),
         ],
       ),

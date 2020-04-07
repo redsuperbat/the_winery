@@ -19,7 +19,7 @@ class LoadingDialog extends StatelessWidget {
             ),
             Text(
               "Adding wine to database, please wait...",
-              style: subTitleStyle,
+              style: subTitleStyle1,
               textAlign: TextAlign.center,
             ),
           ],

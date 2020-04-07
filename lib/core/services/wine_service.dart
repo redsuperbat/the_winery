@@ -74,16 +74,32 @@ class WineService {
     _wines.add(searchWines);
   }
 
-  Future changeCellar(String cellarName) async {
-    cellar = cellarName;
-    await getAllWine();
-  }
+  // Future changeCellar(String cellarName) async {
+  //   cellar = cellarName;
+  //   await getAllWine();
+  // }
 
-  Future addCellar(String name) async {
-    // TODO: Implement adding cellars
-    cellar = name;
-    // await _db.createTable(name);
-    await getAllWine();
+  // Future addCellar(String name) async {
+  //   // TODO: Implement adding cellars
+  //   cellar = name;
+  //   // await _db.createTable(name);
+  //   await getAllWine();
+  // }
+
+  Future<void> archiveAllUserWines() async {
+    final response = await http.patch('$endpoint/wines',
+        headers: {'Authorization': 'Bearer ${_userService.token}'},
+        body: {'archived': true});
+    if (response.statusCode == 200) {
+      print(response.body);
+      activeWines = activeWines.map<Wine>((wine) {
+        wine.archived = true;
+        return wine;
+      }).toList();
+      sinkActiveWines();
+    } else {
+      print(response.body);
+    }
   }
 
   Future<void> filterWine() async {

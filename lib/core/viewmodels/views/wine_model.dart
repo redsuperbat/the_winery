@@ -17,6 +17,8 @@ class WineModel extends BaseModel {
   File image;
   String get wineImageFilePath => _wineService.wineImageFilePath;
 
+  String id;
+
   Map updateOps = {};
 
   WineModel({@required WineService wineService, @required Settings settings})
@@ -25,18 +27,20 @@ class WineModel extends BaseModel {
 
   void initialize(Wine wine) {
     cmtController.text = wine.comment;
+    id = wine.id;
   }
 
   @override
   void dispose() {
     print("Disposing WineModel");
+    updateWine();
     super.dispose();
   }
 
-  Future<bool> updateWine(Wine wine) async {
-    await _wineService.updateWine(updateOps, wine.id);
-    await _wineService.getAllWine();
-    return true;
+  void updateWine() {
+    if (updateOps.length > 0) {
+      _wineService.updateWine(updateOps, id);
+    }
   }
 
   Future<void> getImage(Wine wine) async {

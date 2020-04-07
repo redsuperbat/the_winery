@@ -35,7 +35,7 @@ class RegisterView extends StatelessWidget {
                         Text(
                           "Please Register an account to continue.",
                           textAlign: TextAlign.center,
-                          style: subTitleStyle,
+                          style: subTitleStyle1,
                         ),
                       ],
                     ),

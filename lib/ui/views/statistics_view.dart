@@ -31,14 +31,14 @@ class StatisticsView extends StatelessWidget {
                   children: [
                     TopCard(model: model),
                     PieChartPageView(model: model),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      child: Card(
-                        child: Center(
-                          child: Text("Ads here"),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   height: MediaQuery.of(context).size.height * 0.3,
+                    //   child: Card(
+                    //     child: Center(
+                    //       child: Text("Ads here"),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
