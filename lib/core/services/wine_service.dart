@@ -2,13 +2,13 @@ import 'dart:async';
 // import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:wine_cellar/core/models/wine.dart';
+import 'package:the_winery/core/models/wine.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:wine_cellar/core/services/user_service.dart';
+import 'package:the_winery/core/services/user_service.dart';
 
 class WineService {
   final UserService _userService;

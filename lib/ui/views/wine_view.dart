@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/viewmodels/views/wine_model.dart';
+import 'package:the_winery/core/models/wine.dart';
+import 'package:the_winery/core/viewmodels/views/wine_model.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../constants.dart';

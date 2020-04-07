@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
-import 'package:wine_cellar/core/models/country.dart';
-import 'package:wine_cellar/ui/constants.dart';
+import 'package:the_winery/core/models/country.dart';
+import 'package:the_winery/ui/constants.dart';
 
 class JsonService {
   final List<Country> _countries = [];
@@ -27,6 +27,6 @@ class JsonService {
       });
       _countries.sort((f, s) => (f.name.compareTo(s.name)));
       _suggestedCountries.sort((f, s) => (f.name.compareTo(s.name)));
-      }
-      }
+    }
+  }
 }

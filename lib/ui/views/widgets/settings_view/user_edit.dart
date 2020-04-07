@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/views/settings_model.dart';
+import 'package:the_winery/core/viewmodels/views/settings_model.dart';
 
 class UserEdit extends StatelessWidget {
   final SettingsModel model;

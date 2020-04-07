@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:wine_cellar/core/models/profile.dart';
-import 'package:wine_cellar/core/viewmodels/views/settings_model.dart';
-import 'package:wine_cellar/ui/constants.dart';
+// import 'package:the_winery/core/models/profile.dart';
+import 'package:the_winery/core/viewmodels/views/settings_model.dart';
+import 'package:the_winery/ui/constants.dart';
 
 class Cellars extends StatelessWidget {
   final SettingsModel model;

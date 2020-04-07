@@ -1,8 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 // import 'package:provider/provider.dart';
-// import 'package:wine_cellar/core/viewmodels/widgets/wine_form_model.dart';
-// import 'package:wine_cellar/ui/views/widgets/wine_view/property_changer.dart';
+// import 'package:the_winery/core/viewmodels/widgets/wine_form_model.dart';
+// import 'package:the_winery/ui/views/widgets/wine_view/property_changer.dart';
 
 // import '../../base_widget.dart';
 

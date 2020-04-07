@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:wine_cellar/core/models/wine.dart';
+import 'package:the_winery/core/models/wine.dart';
 
 class MyYearPicker extends StatefulWidget {
   final int selectedYear;

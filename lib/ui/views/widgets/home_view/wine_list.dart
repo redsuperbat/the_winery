@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/wine_list_model.dart';
+import 'package:the_winery/core/viewmodels/widgets/wine_list_model.dart';
 
 import '../../base_widget.dart';
 import 'wine_card.dart';

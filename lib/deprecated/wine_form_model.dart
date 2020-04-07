@@ -1,5 +1,5 @@
-import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/services/wine_service.dart';
+import 'package:the_winery/core/models/wine.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 
 // import '../base_model.dart';
 import 'package:flutter/material.dart';

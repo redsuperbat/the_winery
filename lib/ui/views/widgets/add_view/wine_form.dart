@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/add_view/add_wine_form_model.dart';
-import 'package:wine_cellar/ui/constants.dart';
+import 'package:the_winery/core/models/wine.dart';
+import 'package:the_winery/core/viewmodels/widgets/add_view/add_wine_form_model.dart';
+import 'package:the_winery/ui/constants.dart';
 
 import '../../base_widget.dart';
 

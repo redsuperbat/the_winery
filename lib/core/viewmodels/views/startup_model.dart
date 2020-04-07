@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:wine_cellar/core/services/user_service.dart';
-import 'package:wine_cellar/core/viewmodels/base_model.dart';
+import 'package:the_winery/core/services/user_service.dart';
+import 'package:the_winery/core/viewmodels/base_model.dart';
 
 class StartupModel extends BaseModel {
   StreamController<String> _starterView = StreamController();

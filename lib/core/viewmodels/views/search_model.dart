@@ -1,6 +1,6 @@
-import 'package:wine_cellar/core/services/wine_service.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 
-import 'package:wine_cellar/core/viewmodels/base_model.dart';
+import 'package:the_winery/core/viewmodels/base_model.dart';
 
 class SearchModel extends BaseModel {
   final WineService _wineService;

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:wine_cellar/core/services/user_service.dart';
-import 'package:wine_cellar/core/viewmodels/base_model.dart';
+import 'package:the_winery/core/services/user_service.dart';
+import 'package:the_winery/core/viewmodels/base_model.dart';
 
 class RegisterModel extends BaseModel {
   UserService _userService;

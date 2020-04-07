@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/services/user_service.dart';
-import 'package:wine_cellar/core/viewmodels/views/startup_model.dart';
-import 'package:wine_cellar/ui/views/base_widget.dart';
-import 'package:wine_cellar/ui/views/home_view.dart';
+import 'package:the_winery/core/services/user_service.dart';
+import 'package:the_winery/core/viewmodels/views/startup_model.dart';
+import 'package:the_winery/ui/views/base_widget.dart';
+import 'package:the_winery/ui/views/home_view.dart';
 
 import 'register_view.dart';
 

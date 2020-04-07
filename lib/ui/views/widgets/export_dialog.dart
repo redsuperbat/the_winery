@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/views/export_model.dart';
+import 'package:the_winery/core/viewmodels/views/export_model.dart';
 
 class ExportDialog extends StatelessWidget {
   final ExportModel model;

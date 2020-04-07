@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
-// import 'package:wine_cellar/core/models/profile.dart';
-// import 'package:wine_cellar/core/viewmodels/views/cellar_edit_model.dart';
+// import 'package:the_winery/core/models/profile.dart';
+// import 'package:the_winery/core/viewmodels/views/cellar_edit_model.dart';
 
 // import '../constants.dart';
 // import 'base_widget.dart';

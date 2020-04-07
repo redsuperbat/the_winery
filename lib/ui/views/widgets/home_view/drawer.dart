@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:wine_cellar/core/models/profile.dart';
-import 'package:wine_cellar/core/viewmodels/views/home_model.dart';
+// import 'package:the_winery/core/models/profile.dart';
+import 'package:the_winery/core/viewmodels/views/home_model.dart';
 
 import '../../../constants.dart';
 // import 'welcome_dialog.dart';

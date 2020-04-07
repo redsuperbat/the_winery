@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/views/settings_model.dart';
-import 'package:wine_cellar/ui/views/widgets/settings_view/user_edit.dart';
+import 'package:the_winery/core/viewmodels/views/settings_model.dart';
+import 'package:the_winery/ui/views/widgets/settings_view/user_edit.dart';
 import '../constants.dart';
 import 'base_widget.dart';
 

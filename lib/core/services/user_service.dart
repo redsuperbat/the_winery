@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:wine_cellar/core/models/User.dart';
+import 'package:the_winery/core/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;

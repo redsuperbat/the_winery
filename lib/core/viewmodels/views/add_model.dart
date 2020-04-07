@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:wine_cellar/core/services/wine_service.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 
 import '../base_model.dart';
 

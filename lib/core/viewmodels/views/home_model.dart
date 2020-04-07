@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
-// import 'package:wine_cellar/core/models/profile.dart';
-// import 'package:wine_cellar/core/services/profile_service.dart';
-import 'package:wine_cellar/core/services/settings_service.dart';
-import 'package:wine_cellar/core/services/wine_service.dart';
+// import 'package:the_winery/core/models/profile.dart';
+// import 'package:the_winery/core/services/profile_service.dart';
+import 'package:the_winery/core/services/settings_service.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 
-import 'package:wine_cellar/core/viewmodels/base_model.dart';
+import 'package:the_winery/core/viewmodels/base_model.dart';
 
 class HomeModel extends BaseModel {
   final WineService _wineService;

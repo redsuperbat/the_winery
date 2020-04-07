@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/services/settings_service.dart';
-import 'package:wine_cellar/core/services/wine_service.dart';
+import 'package:the_winery/core/models/wine.dart';
+import 'package:the_winery/core/services/settings_service.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 
-import 'package:wine_cellar/core/viewmodels/base_model.dart';
+import 'package:the_winery/core/viewmodels/base_model.dart';
 
 class WineModel extends BaseModel {
   final WineService _wineService;

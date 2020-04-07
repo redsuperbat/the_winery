@@ -1,6 +1,6 @@
 // import 'package:flutter/cupertino.dart';
-// import 'package:wine_cellar/core/models/profile.dart';
-// import 'package:wine_cellar/core/services/profile_service.dart';
+// import 'package:the_winery/core/models/profile.dart';
+// import 'package:the_winery/core/services/profile_service.dart';
 
 // import '../base_model.dart';
 

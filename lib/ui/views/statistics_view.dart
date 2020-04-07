@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
+import 'package:the_winery/core/viewmodels/views/statistics_model.dart';
 
 import 'base_widget.dart';
 import 'widgets/statistics_view/pie_chart_page_view.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wine_cellar/core/viewmodels/views/statistics_model.dart';
+import 'package:the_winery/core/viewmodels/views/statistics_model.dart';
 
 import '../../../constants.dart';
 import 'custom_pie_chart.dart';

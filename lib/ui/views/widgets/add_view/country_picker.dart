@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wine_cellar/core/viewmodels/widgets/add_view/country_picker_model.dart';
+import 'package:the_winery/core/viewmodels/widgets/add_view/country_picker_model.dart';
 
 import '../../base_widget.dart';
 import 'country_dialog.dart';
@@ -16,18 +16,18 @@ class CountryPicker extends StatelessWidget {
           ? RaisedButton(
               child: Text("Wine origin country"),
               onPressed: () => showDialog(
-                    context: context,
-                    builder: (_) => CountryDialog(model: model),
-                  ),
+                context: context,
+                builder: (_) => CountryDialog(model: model),
+              ),
             )
           : Container(
               width: MediaQuery.of(context).size.width * 0.45,
               height: 60,
               child: InkWell(
                 onTap: () => showDialog(
-                      context: context,
-                      builder: (_) => CountryDialog(model: model),
-                    ),
+                  context: context,
+                  builder: (_) => CountryDialog(model: model),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

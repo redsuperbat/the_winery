@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:wine_cellar/core/services/user_service.dart';
+import 'package:the_winery/core/services/user_service.dart';
 import '../base_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 

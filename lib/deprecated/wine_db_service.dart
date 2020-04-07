@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
 /*import 'package:path/path.dart';
-import 'package:wine_cellar/core/models/wine.dart';*/
+import 'package:the_winery/core/models/wine.dart';*/
 
 class WineDb {
   Database database;

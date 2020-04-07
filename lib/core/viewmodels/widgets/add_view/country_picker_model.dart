@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:meta/meta.dart';
-import 'package:wine_cellar/core/models/country.dart';
-import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/services/json_service.dart';
-import 'package:wine_cellar/core/services/wine_service.dart';
+import 'package:the_winery/core/models/country.dart';
+import 'package:the_winery/core/models/wine.dart';
+import 'package:the_winery/core/services/json_service.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 
 import '../../base_model.dart';
 

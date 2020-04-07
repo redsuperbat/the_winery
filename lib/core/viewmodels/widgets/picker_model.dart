@@ -1,5 +1,5 @@
-import 'package:wine_cellar/core/models/wine.dart';
-import 'package:wine_cellar/core/services/wine_service.dart';
+import 'package:the_winery/core/models/wine.dart';
+import 'package:the_winery/core/services/wine_service.dart';
 import 'dart:async';
 
 import '../base_model.dart';
@@ -16,7 +16,6 @@ class PickerModel extends BaseModel {
   Stream<Wine> get wineStream => _wineService.wineStream;
 
   Wine get wine => _wineService.wine;
-
 
   @override
   void dispose() {
