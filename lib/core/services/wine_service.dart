@@ -133,13 +133,6 @@ class WineService {
     }
   }
 
-  // DEPRECATED TO BE REMOVED
-  Future<List<Map<String, dynamic>>> getExportData() async {
-    // TODO: Implement this
-    // final request = await _db.getTable(cellar);
-    return [];
-  }
-
   Future<void> getAllWine() async {
     final response = await http.get('$endpoint/wines',
         headers: {'Authorization': 'Bearer ${_userService.token}'});
