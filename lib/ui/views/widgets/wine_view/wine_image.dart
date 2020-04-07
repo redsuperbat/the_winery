@@ -36,14 +36,21 @@ class WineImage extends StatelessWidget {
               onTap: () =>
                   Navigator.pushNamed(context, 'image', arguments: url),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  url,
-                  fit: BoxFit.contain,
-                  height: height,
-                  width: width,
-                ),
-              ),
+                  borderRadius: BorderRadius.circular(10),
+                  child: FadeInImage.assetNetwork(
+                    fit: BoxFit.cover,
+                    height: height,
+                    width: width,
+                    placeholder: 'assets/loading.gif',
+                    image: url,
+                  )
+                  // child: Image.network(
+                  //   url,
+                  //   fit: BoxFit.contain,
+                  //   height: height,
+                  //   width: width,
+                  // ),
+                  ),
             ),
     );
   }

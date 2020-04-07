@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:the_winery/core/viewmodels/views/add_model.dart';
+import 'package:the_winery/ui/views/widgets/loading_dialog.dart';
 import '../constants.dart';
 
 import 'base_widget.dart';
@@ -38,16 +41,31 @@ class Add extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             backgroundColor: Colors.red,
-            child: Icon(
-              Icons.add_a_photo,
-              color: Colors.white,
-            ),
+            child: model.busy
+                ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(accentColor),
+                  )
+                : model.image == null
+                    ? Icon(
+                        Icons.add_a_photo,
+                        color: Colors.white,
+                      )
+                    : Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: FileImage(model.image),
+                          ),
+                        ),
+                      ),
             onPressed: () async => await model.getImage(),
           ),
           body: SingleChildScrollView(
             child: Card(
               elevation: 5,
-              margin: EdgeInsets.all(25),
+              margin: EdgeInsets.all(20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
@@ -56,13 +74,6 @@ class Add extends StatelessWidget {
                     style: TextStyle(fontSize: 30, color: mainColor),
                     textAlign: TextAlign.center,
                   ),
-                  model.image == null
-                      ? Container()
-                      : Image.file(
-                          model.image,
-                          fit: BoxFit.contain,
-                          height: 100,
-                        ),
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: AddWineForm(),
@@ -96,7 +107,13 @@ class Add extends StatelessWidget {
                   RaisedButton(
                     color: confirmColor,
                     onPressed: () async {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => LoadingDialog(),
+                      );
                       await model.addWine();
+                      Navigator.pop(context);
                       Navigator.pop(context);
                     },
                     child: Text(

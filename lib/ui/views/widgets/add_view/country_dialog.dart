@@ -26,21 +26,26 @@ class CountryDialog extends StatelessWidget {
                     StreamBuilder<bool>(
                         initialData: true,
                         stream: model.suggestionStream,
-                        builder: (context, snapshot) => snapshot.data
-                            ? Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.4,
-                                child: ListView.builder(
-                                  physics: ScrollPhysics(),
-                                  itemCount: model.suggestedCountries.length,
-                                  itemBuilder: (context, index) => CountryTile(
-                                    country: model.suggestedCountries[index],
-                                    onTap: (country) =>
-                                        model.setCountry(country),
-                                  ),
-                                ),
-                              )
-                            : Container()),
+                        builder: (context, snapshot) => AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              height: snapshot.data
+                                  ? MediaQuery.of(context).size.height * 0.4
+                                  : 0,
+                              child: snapshot.data
+                                  ? ListView.builder(
+                                      physics: ScrollPhysics(),
+                                      itemCount:
+                                          model.suggestedCountries.length,
+                                      itemBuilder: (context, index) =>
+                                          CountryTile(
+                                        country:
+                                            model.suggestedCountries[index],
+                                        onTap: (country) =>
+                                            model.setCountry(country),
+                                      ),
+                                    )
+                                  : Container(),
+                            )),
                     CountryTitle(
                       initialData: false,
                       title: "Other countries",
@@ -50,21 +55,24 @@ class CountryDialog extends StatelessWidget {
                     StreamBuilder<bool>(
                         initialData: false,
                         stream: model.otherStream,
-                        builder: (context, snapshot) => snapshot.data
-                            ? Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.4,
-                                child: ListView.builder(
-                                  physics: ScrollPhysics(),
-                                  itemCount: model.countries.length,
-                                  itemBuilder: (context, index) => CountryTile(
-                                    country: model.countries[index],
-                                    onTap: (country) =>
-                                        model.setCountry(country),
-                                  ),
-                                ),
-                              )
-                            : Container()),
+                        builder: (context, snapshot) => AnimatedContainer(
+                              duration: Duration(milliseconds: 300),
+                              height: snapshot.data
+                                  ? MediaQuery.of(context).size.height * 0.4
+                                  : 0,
+                              child: snapshot.data
+                                  ? ListView.builder(
+                                      physics: ScrollPhysics(),
+                                      itemCount: model.countries.length,
+                                      itemBuilder: (context, index) =>
+                                          CountryTile(
+                                        country: model.countries[index],
+                                        onTap: (country) =>
+                                            model.setCountry(country),
+                                      ),
+                                    )
+                                  : Container(),
+                            )),
                   ],
                 ),
               ),
@@ -102,7 +110,7 @@ class CountryTitle extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               Spacer(),
-              Icon(snapshot.data ? Icons.arrow_drop_down : Icons.arrow_drop_up)
+              Icon(snapshot.data ? Icons.arrow_drop_up : Icons.arrow_drop_down)
             ],
           ),
         ),

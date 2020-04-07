@@ -71,7 +71,10 @@ class HomeView extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.red,
           onPressed: () => Navigator.pushNamed(context, 'add'),
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 5),
